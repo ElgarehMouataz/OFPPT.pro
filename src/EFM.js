@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Specialite from "./specialite";
+import Filliere from "./filliere";
 
 const annee = ["Bases de donnees", "Frontend",'Backend']
 
@@ -22,15 +22,15 @@ const buttonColors=[
     {backgroundColor: "#001251"},
     {backgroundColor: "#000C37"},
 ]
-export default function Filliere() {
-  const [showSpecialite, setShowSpecialite] = useState(false);
+export default function EFM() {
+  const [showFilliere, setFilliere] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = "#0034A4";
   }, []);
 
-  if (showSpecialite) {
-    return <Specialite />;
+  if (showFilliere) {
+    return <Filliere />;
   }
 
   return (
@@ -46,7 +46,7 @@ export default function Filliere() {
           <button
             key={e}
             style={{...buttonstyle , ...buttonColors[i]}} 
-            onClick={() => setShowSpecialite(true)}
+            onClick={() => setFilliere(true)}
           >{e}
           </button>
         ))}
