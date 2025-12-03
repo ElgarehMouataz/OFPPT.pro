@@ -38,6 +38,7 @@
 }
 .banner{
   background-image: url('/public/images/Vector1.png');
+  background-repeat: no-repeat;
   height: 307px;
   width: 100%;
 }

@@ -10,9 +10,6 @@ function App() {
   return (
 <>
     <Filliere />
-    <Specialite />
-    <Examen />
-    <EFM />
 </>
   )
 }
