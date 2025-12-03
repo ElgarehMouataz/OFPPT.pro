@@ -44,7 +44,7 @@ export default function Specialite() {
             style={{...buttonstyle , ...buttonColors[i]}}
             onClick={() => setShowExames(true)}
           >
-            {e} année
+            {e}
           </button>
         ))}
       </div>

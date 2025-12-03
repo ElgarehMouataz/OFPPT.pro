@@ -40,8 +40,8 @@ export default function Filliere() {
             key={e}
             style={buttonstyle}
             onClick={() => setShowSpecialite(true)}
-          >
-            {e}
+          > 
+            {e} année
           </button>
         ))}
       </div>
