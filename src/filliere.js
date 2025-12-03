@@ -22,7 +22,7 @@ export default function Filliere() {
   useEffect(() => {
     document.body.style.backgroundColor = "#112655";
   }, []);
-
+  
   if (showSpecialite) {
     return <Specialite />;
   }

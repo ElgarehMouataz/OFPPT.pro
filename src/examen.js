@@ -16,14 +16,14 @@ const buttonstyle = {
   fontFamily:'jura',
 };
 
-export default function Filliere() {
-  const [showSpecialite, setShowSpecialite] = useState(false);
+export default function Examen() {
+  const [showEFM, setEFM] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = "#112655";
   }, []);
 
-  if (showSpecialite) {
+  if (showEFM) {
     return <EFM />;
   }
 
@@ -39,7 +39,7 @@ export default function Filliere() {
           <button
             key={e}
             style={buttonstyle}
-            onClick={() => setShowSpecialite(true)}
+            onClick={() => setEFM(true)}
           >
             {e}
           </button>

@@ -19,14 +19,14 @@ const buttonColors=[
     {backgroundColor: "#001251"},
     {backgroundColor: "#000C37"},
 ]
-export default function Filliere() {
-  const [showSpecialite, setShowSpecialite] = useState(false);
+export default function Specialite() {
+  const [showExames, setShowExames] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = "#0034A4";
   }, []);
 
-  if (showSpecialite) {
+  if (showExames) {
     return <Exames />;
   }
 
@@ -41,8 +41,8 @@ export default function Filliere() {
         {annee.map((e,i) => (
           <button
             key={e}
-            style={{...buttonstyle , ...buttonColors[i]}} 
-            onClick={() => setShowSpecialite(true)}
+            style={{...buttonstyle , ...buttonColors[i]}}
+            onClick={() => setShowExames(true)}
           >
             {e} année
           </button>
