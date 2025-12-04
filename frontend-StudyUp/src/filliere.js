@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Specialite from "./specialite";
 
-const annee = ["Premiere", "Deuxieme", "Troisieme"];
 
 const buttonstyle = {
   margin: "30px",
@@ -18,11 +17,17 @@ const buttonstyle = {
 
 export default function Filliere() {
   const [showSpecialite, setShowSpecialite] = useState(false);
+  const [annee, setAnnee] = useState([]);
+  fetch("http://localhost:8000/api/annees")
+  .then(r => r.json())
+  .then(data => setAnnee(data));
+
 
   useEffect(() => {
     document.body.style.backgroundColor = "#112655";
   }, []);
-  
+  console.log(annee)
+
   if (showSpecialite) {
     return <Specialite />;
   }
