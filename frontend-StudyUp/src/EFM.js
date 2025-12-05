@@ -14,6 +14,7 @@ const buttonstyle = {
   fontSize:'24px',
   fontFamily:'jura',
   backgroundImage: 'url(/images/download.png)',
+  backgroundSize:'13%',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'right center',
 };

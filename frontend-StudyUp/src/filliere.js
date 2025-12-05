@@ -48,7 +48,7 @@ export default function Filliere() {
           > 
             {e} année
           </button>
-        ))}
+        ))}``
       </div>
     </>
   );
