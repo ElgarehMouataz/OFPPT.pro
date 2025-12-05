@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\DB;
 DB_CONNECTION=sqlsrv
 DB_HOST=localhost
 DB_PORT=1433
-DB_USERNAME=sa
-DB_PASSWORD=xxxx
-DB_DATABASE=yourdb
+DB_USERNAME='root'
+DB_PASSWORD=''
+DB_DATABASE='studyup'
 
 
 Route::middleware('api')->group(function () {
