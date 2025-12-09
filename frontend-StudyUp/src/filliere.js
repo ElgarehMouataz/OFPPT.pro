@@ -18,18 +18,23 @@ const buttonstyle = {
 export default function Filliere() {
   const [showSpecialite, setShowSpecialite] = useState(false);
   const [annee, setAnnee] = useState([]);
-  fetch("http://localhost:8000/api/annees")
-  .then(r => r.json())
-  .then(data => setAnnee(data));
+  const [selectedAnnee, setSelectedAnnee] = useState(null);
 
+  
 
   useEffect(() => {
     document.body.style.backgroundColor = "#112655";
-  }, []);
-  console.log(annee)
+ 
+  async function fetchData() {
+    const reponse = await fetch("https://podo.b1.ma/api/public/years");
+    const data = await reponse.json();
+    setAnnee(data.data);
+  }
+  fetchData();
+   }, []);
 
   if (showSpecialite) {
-    return <Specialite />;
+    return <Specialite annee={selectedAnnee}/>;
   }
 
   return (
@@ -42,13 +47,12 @@ export default function Filliere() {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {annee.map((e) => (
           <button
-            key={e}
+            key={e.id}
             style={buttonstyle}
-            onClick={() => setShowSpecialite(true)}
-          > 
-            {e} année
+            onClick={() => {setSelectedAnnee(e.id);setShowSpecialite(true); }}>
+            {e.name}
           </button>
-        ))}``
+        ))}
       </div>
     </>
   );

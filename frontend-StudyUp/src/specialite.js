@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import Exames from "./examen.js";
 
-const annee = ["Developpement", "Logistique",'Comptabilite']
-
 const buttonstyle = {
   margin: "30px",
   padding: "10px",
@@ -19,11 +17,18 @@ const buttonColors=[
     {backgroundColor: "#001251"},
     {backgroundColor: "#000C37"},
 ]
-export default function Specialite() {
+export default function Specialite({annee}) {
   const [showExames, setShowExames] = useState(false);
+  const [specialite, setSpecialite] = useState([]);
 
   useEffect(() => {
     document.body.style.backgroundColor = "#0034A4";
+    async function fetchData() {
+    const reponse = await fetch(`https://podo.b1.ma/api/public/years/${annee}/filieres`);
+    const data = await reponse.json();
+    setSpecialite(data.data);
+  }
+  fetchData();
   }, []);
 
   if (showExames) {
@@ -38,13 +43,13 @@ export default function Specialite() {
       </h1>
 
       <div className='d-flex flex-column align-items-center justify-content-center'>
-        {annee.map((e,i) => (
+        {specialite.map((e,i) => (
           <button
-            key={e}
-            style={{...buttonstyle , ...buttonColors[i]}}
+            key={e.id}
+            style={{...buttonstyle,...(e.id % 2? buttonColors[1]: (e.id % 3 === 0? buttonColors[2]: buttonColors[0]))}}
             onClick={() => setShowExames(true)}
           >
-            {e}
+            {e.name}
           </button>
         ))}
       </div>
