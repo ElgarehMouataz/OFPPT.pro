@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import EFM from "./EFM.js";
 
-const annee = ["Cours", "Exercices", "EFM"];
 
 const buttonstyle = {
   margin: "30px",
@@ -16,15 +15,23 @@ const buttonstyle = {
   fontFamily:'jura',
 };
 
-export default function Examen() {
+export default function Examen({filliere}) {
   const [showEFM, setEFM] = useState(false);
+  const [modules, setModules] = useState([]);
+  const [selectedModule, setSelectedModule] = useState(null);
 
   useEffect(() => {
     document.body.style.backgroundColor = "#112655";
+    async function fetchData() {
+    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliere}/modules`);
+    const data = await reponse.json();
+    setModules(data.data);
+  }
+  fetchData();
   }, []);
 
   if (showEFM) {
-    return <EFM />;
+    return <EFM module={selectedModule}/>;
   }
 
   return (
@@ -35,13 +42,13 @@ export default function Examen() {
       </h1>
 
       <div className='d-flex flex-column align-items-center justify-content-center'>
-        {annee.map((e) => (
+        {modules.map((e) => (
           <button
-            key={e}
+            key={e.id}
             style={buttonstyle}
-            onClick={() => setEFM(true)}
+            onClick={() => {setSelectedModule(e.id);setEFM(true)}}
           >
-            {e}
+            {e.name}
           </button>
         ))}
       </div>

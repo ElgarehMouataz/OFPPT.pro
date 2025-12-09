@@ -33,7 +33,7 @@ export default function Specialite({annee}) {
   }, []);
 
   if (showExames) {
-    return <Exames />;
+    return <Exames filliere={selectedSpecialite}/>;
   }
 
   return (
@@ -48,7 +48,7 @@ export default function Specialite({annee}) {
           <button
             key={e.id}
             style={{...buttonstyle,...buttonColors[i % 3]}}
-            onClick={() => {setSelecteSpecialite(e);setShowExames(true)}}
+            onClick={() => {setSelecteSpecialite(e.id);setShowExames(true)}}
           >
             {e.name}
           </button>
