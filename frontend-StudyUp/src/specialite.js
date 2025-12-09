@@ -20,6 +20,7 @@ const buttonColors=[
 export default function Specialite({annee}) {
   const [showExames, setShowExames] = useState(false);
   const [specialite, setSpecialite] = useState([]);
+  const [selectedSpecialite, setSelecteSpecialite] = useState(null);
 
   useEffect(() => {
     document.body.style.backgroundColor = "#0034A4";
@@ -46,8 +47,8 @@ export default function Specialite({annee}) {
         {specialite.map((e,i) => (
           <button
             key={e.id}
-            style={{...buttonstyle,...(e.id % 2? buttonColors[1]: (e.id % 3 === 0? buttonColors[2]: buttonColors[0]))}}
-            onClick={() => setShowExames(true)}
+            style={{...buttonstyle,...buttonColors[i % 3]}}
+            onClick={() => {setSelecteSpecialite(e);setShowExames(true)}}
           >
             {e.name}
           </button>
