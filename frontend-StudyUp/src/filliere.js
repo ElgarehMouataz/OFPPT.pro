@@ -1,55 +1,41 @@
 import { useState, useEffect } from "react";
-import Specialite from "./specialite";
-
-
-const buttonstyle = {
-  margin: "30px",
-  padding: "10px",
-  borderRadius: "15px",
-  backgroundColor: "#314EB7",
-  color: "white",
-  border: "none",
-  width:'305px',
-  height:'108px',
-  fontSize:'24px',
-  fontFamily:'jura',
-};
-
-export default function Filliere() {
-  const [showSpecialite, setShowSpecialite] = useState(false);
-  const [annee, setAnnee] = useState([]);
-  const [selectedAnnee, setSelectedAnnee] = useState(null);
-
-  
-
+import Modules from "./Modules.js";
+const buttonColors=[
+    {backgroundColor: "#001664"},
+    {backgroundColor: "#001251"},
+    {backgroundColor: "#000C37"},
+]
+export default function Filliere({annee}) {
+  const [showModules, setShowModules] = useState(false);
+  const [Filliere, setFilliere] = useState([]);
+  const [selectedFilliere, setSelectedFilliere] = useState(null);
   useEffect(() => {
     document.body.style.backgroundColor = "#112655";
- 
-  async function fetchData() {
-    const reponse = await fetch("https://podo.b1.ma/api/public/years");
+    async function fetchData() {
+    const reponse = await fetch(`https://podo.b1.ma/api/public/years/${annee}/filieres`);
     const data = await reponse.json();
-    setAnnee(data.data);
+    setFilliere(data.data);
   }
   fetchData();
-   }, []);
-
-  if (showSpecialite) {
-    return <Specialite annee={selectedAnnee}/>;
+  }, []);
+  if (showModules) {
+    return <Modules filliere={selectedFilliere}/>;
   }
-
   return (
     <>
       <div className="banner"></div>
       <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
-        Choisir votre année:
+        Choisir votre filliere :
       </h1>
 
       <div className='d-flex flex-column align-items-center justify-content-center'>
-        {annee.map((e) => (
+        {Filliere.map((e,i) => (
           <button
+            className="buttonstyle"
             key={e.id}
-            style={buttonstyle}
-            onClick={() => {setSelectedAnnee(e.id);setShowSpecialite(true); }}>
+            style={{...buttonColors[i % 3]}}
+            onClick={() => {setSelectedFilliere(e.id);setShowModules(true)}}
+          >
             {e.name}
           </button>
         ))}

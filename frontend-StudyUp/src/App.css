@@ -42,3 +42,15 @@
   height: 307px;
   width: 100%;
 }
+.buttonstyle{
+  margin: 30px;
+  padding: 10px;
+  border-Radius: 15px;
+  background-color: #314EB7;
+  color: white;
+  border: none;
+  width:305px;
+  min-Height:108px;
+  font-Size:24px;
+  font-Family:jura;
+};

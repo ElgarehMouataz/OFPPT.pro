@@ -1,25 +1,9 @@
 import { useState, useEffect } from "react";
-import EFM from "./EFM.js";
-
-
-const buttonstyle = {
-  margin: "30px",
-  padding: "10px",
-  borderRadius: "15px",
-  backgroundColor: "#314EB7",
-  color: "white",
-  border: "none",
-  width:'305px',
-  height:'108px',
-  fontSize:'24px',
-  fontFamily:'jura',
-};
-
-export default function Examen({filliere}) {
-  const [showEFM, setEFM] = useState(false);
-  const [modules, setModules] = useState([]);
+import Resources from "./Resources.js";
+export default function Modules({filliere}) {
+  const [showResources, setResources] = useState(false);
+  const [Modules, setModules] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
-
   useEffect(() => {
     document.body.style.backgroundColor = "#112655";
     async function fetchData() {
@@ -29,24 +13,21 @@ export default function Examen({filliere}) {
   }
   fetchData();
   }, []);
-
-  if (showEFM) {
-    return <EFM module={selectedModule} filliere={filliere}/>;
+  if (showResources) {
+    return <Resources module={selectedModule} filliere={filliere}/>;
   }
-
   return (
     <>
       <div className="banner"></div>
       <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
         Preparation module:
       </h1>
-
       <div className='d-flex flex-column align-items-center justify-content-center'>
-        {modules.map((e) => (
+        {Modules.map((e) => (
           <button
+            className="buttonstyle"
             key={e.id}
-            style={buttonstyle}
-            onClick={() => {setSelectedModule(e.id);setEFM(true)}}
+            onClick={() => {setSelectedModule(e.id);setResources(true)}}
           >
             {e.name}
           </button>
