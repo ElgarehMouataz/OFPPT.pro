@@ -31,7 +31,7 @@ export default function Examen({filliere}) {
   }, []);
 
   if (showEFM) {
-    return <EFM module={selectedModule}/>;
+    return <EFM module={selectedModule} filliere={filliere}/>;
   }
 
   return (
