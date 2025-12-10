@@ -23,7 +23,7 @@ export default function Specialite({annee}) {
   const [selectedSpecialite, setSelecteSpecialite] = useState(null);
 
   useEffect(() => {
-    document.body.style.backgroundColor = "#0034A4";
+    document.body.style.backgroundColor = "#112655";
     async function fetchData() {
     const reponse = await fetch(`https://podo.b1.ma/api/public/years/${annee}/filieres`);
     const data = await reponse.json();
@@ -40,7 +40,7 @@ export default function Specialite({annee}) {
     <>
       <div className="banner"></div>
       <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
-        Choisir votre année:
+        Choisir votre filliere :
       </h1>
 
       <div className='d-flex flex-column align-items-center justify-content-center'>

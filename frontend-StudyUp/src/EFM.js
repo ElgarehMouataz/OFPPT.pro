@@ -28,7 +28,7 @@ export default function EFM({module,filliere}) {
   const [selectedChoix, setSelectedChoix] = useState(null);
 
   useEffect(() => {
-    document.body.style.backgroundColor = "#0034A4";
+    document.body.style.backgroundColor = "#112655";
   }, []);
 
   if (showFilliere) {
@@ -38,9 +38,6 @@ export default function EFM({module,filliere}) {
   return (
     <>
       <div className="banner"></div>
-      <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
-        Choisir votre année:
-      </h1>
 
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {choixs.map((e,i) => (

@@ -38,7 +38,7 @@ export default function Examen({filliere}) {
     <>
       <div className="banner"></div>
       <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
-        Preparation examen:
+        Preparation module:
       </h1>
 
       <div className='d-flex flex-column align-items-center justify-content-center'>
