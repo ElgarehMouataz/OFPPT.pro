@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-
 const buttonstyle = {
   margin: "30px",
   padding: "10px",
@@ -42,9 +41,7 @@ export default function Choix({choix,module,filliere}) {
     <>
     
       <div className="banner"></div>
-      <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
-        Choisir votre année:
-      </h1>
+
 
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {List.map((e,i) => (
@@ -60,4 +57,3 @@ export default function Choix({choix,module,filliere}) {
     </>
     
   )};
-
