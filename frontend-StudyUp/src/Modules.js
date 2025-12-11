@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import Resources from "./Resources.js";
-export default function Modules({filliere}) {
+import Filliere from './Filliere.js'
+
+
+
+export default function Modules({filliere,annee}) {
+
   const [showResources, setResources] = useState(false);
+  const [Return, setReturn] = useState(false);
   const [Modules, setModules] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
   useEffect(() => {
@@ -14,7 +20,10 @@ export default function Modules({filliere}) {
   fetchData();
   }, []);
   if (showResources) {
-    return <Resources module={selectedModule} filliere={filliere}/>;
+    return <Resources filliere={filliere} annee={annee} module={selectedModule}/>;
+  }
+   if (Return) {
+    return <Filliere annee={annee} filliere={filliere}/>;
   }
   return (
     <>
@@ -32,6 +41,7 @@ export default function Modules({filliere}) {
             {e.name}
           </button>
         ))}
+        <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
       </div>
     </>
   );

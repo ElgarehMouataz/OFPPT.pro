@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Annee from "./Annee.js";
 import Modules from "./Modules.js";
 const buttonColors=[
     {backgroundColor: "#001664"},
@@ -6,7 +7,9 @@ const buttonColors=[
     {backgroundColor: "#000C37"},
 ]
 export default function Filliere({annee}) {
+
   const [showModules, setShowModules] = useState(false);
+  const [Return, setReturn] = useState(false);
   const [Filliere, setFilliere] = useState([]);
   const [selectedFilliere, setSelectedFilliere] = useState(null);
   useEffect(() => {
@@ -19,7 +22,10 @@ export default function Filliere({annee}) {
   fetchData();
   }, []);
   if (showModules) {
-    return <Modules filliere={selectedFilliere}/>;
+    return <Modules annee={annee} filliere={selectedFilliere} />;
+  }
+  if (Return) {
+    return <Annee />;
   }
   return (
     <>
@@ -39,6 +45,7 @@ export default function Filliere({annee}) {
             {e.name}
           </button>
         ))}
+        <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
       </div>
     </>
   );

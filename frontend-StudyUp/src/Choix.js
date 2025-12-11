@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import Resources from "./Resources.js";
 const buttonColors=[
     {backgroundColor: "#001664"},
     {backgroundColor: "#001251"},
     {backgroundColor: "#000C37"},
 ]
-export default function Choix({choix,module,filliere}) {
+
+export default function Choix({choix,module,filliere,annee}) {
+  const [Return, setReturn] = useState(false);
   const [List, setList] = useState([]);
   const [selectedList, setSelectedList] = useState(null);
 
@@ -21,10 +24,10 @@ export default function Choix({choix,module,filliere}) {
     setList(data.data);
   }
   fetchData();
-  console.log(List)
-  console.log(module)
-  console.log(APIS[choix])
   }, []);
+    if (Return) {
+      return <Resources module={module} filliere={filliere} annee={annee}/>;
+    }
         return (   
     <>
       <div className="banner"></div>
@@ -42,6 +45,7 @@ export default function Choix({choix,module,filliere}) {
             <img src='./images/download.png'></img>
           </button>
         ))}
+        <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
       </div>
     </>
     
