@@ -20,7 +20,7 @@ export default function Annee() {
     <>
       <div className="banner"></div>
       <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
-        Choisir votre année:
+        Choisir votre année: 
       </h1>
 
       <div className='d-flex flex-column align-items-center justify-content-center'>
