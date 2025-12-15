@@ -18,11 +18,8 @@ export default function Resources({module,filliere,annee}) {
     async function fetchData() {
     const reponse = await Promise.all(APIS.map((api)=>fetch(api)));
     const data = await Promise.all(reponse.map((rep)=>rep.json()));
-    console.log(data)
     const cleandata= await data.flatMap((item)=>item.data)
     setList(cleandata);
-    console.log(cleandata)
-    console.log(module)
   }
   fetchData();
   }, []);
