@@ -29,7 +29,7 @@ export default function Filliere({annee}) {
   return (
     <>
       <div className="banner"></div>
-      <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
+      <h1 style={{color:"#001c83ff", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
         Choisir votre filliere :
       </h1>
 

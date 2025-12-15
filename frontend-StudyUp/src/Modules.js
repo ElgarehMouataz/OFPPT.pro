@@ -27,7 +27,7 @@ export default function Modules({filliere,annee}) {
   return (
     <>
       <div className="banner"></div>
-      <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
+      <h1 style={{color:"#001c83ff", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
         Preparation module:
       </h1>
       <div className='d-flex flex-column align-items-center justify-content-center'>

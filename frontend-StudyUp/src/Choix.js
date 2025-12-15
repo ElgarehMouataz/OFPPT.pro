@@ -12,7 +12,6 @@ export default function Choix({choix,module,filliere,annee}) {
   const [selectedList, setSelectedList] = useState(null);
 
   useEffect(() => {
-    document.body.style.backgroundColor = "#112655";
     const APIS=[`https://podo.b1.ma/api/public/modules/${module}/courses`,
                 `https://podo.b1.ma/api/public/modules/${module}/ccs`,
                 `https://podo.b1.ma/api/public/modules/${module}/efms`,
