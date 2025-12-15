@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Filliere from "./Filliere.js";
+import Filliere from "./Fillieres.js";
 export default function Annee() {
   const [showFilliere, setShowFilliere] = useState(false);
   const [annee, setAnnee] = useState([]);
@@ -9,6 +9,7 @@ export default function Annee() {
     const reponse = await fetch("https://podo.b1.ma/api/public/years");
     const data = await reponse.json();
     setAnnee(data.data);
+
   }
   fetchData();
    }, []);
@@ -21,7 +22,6 @@ export default function Annee() {
       <h1 style={{color:"#001c83ff", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
         Choisir votre année: 
       </h1>
-
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {annee.map((e) => (
           <button className="buttonstyle"
