@@ -5,7 +5,6 @@ export default function Annee() {
   const [annee, setAnnee] = useState([]);
   const [selectedAnnee, setSelectedAnnee] = useState(null);
   useEffect(() => {
-    document.body.style.backgroundColor = "#112655";
     async function fetchData() {
     const reponse = await fetch("https://podo.b1.ma/api/public/years");
     const data = await reponse.json();
@@ -19,7 +18,7 @@ export default function Annee() {
   return (
     <>
       <div className="banner"></div>
-      <h1 style={{color:"white", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
+      <h1 style={{color:"#001c83ff", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
         Choisir votre année: 
       </h1>
 

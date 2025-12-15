@@ -14,7 +14,6 @@ export default function Resources({module,filliere,annee}) {
   const [Return, setReturn] = useState(false);
   const [selectedChoix, setSelectedChoix] = useState(null);
   useEffect(() => {
-    document.body.style.backgroundColor = "#112655";
   }, []);
 
   if (showChoix) {

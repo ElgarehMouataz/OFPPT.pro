@@ -11,7 +11,6 @@ export default function Modules({filliere,annee}) {
   const [Modules, setModules] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
   useEffect(() => {
-    document.body.style.backgroundColor = "#112655";
     async function fetchData() {
     const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliere}/modules`);
     const data = await reponse.json();

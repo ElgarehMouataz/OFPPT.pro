@@ -13,7 +13,6 @@ export default function Filliere({annee}) {
   const [Filliere, setFilliere] = useState([]);
   const [selectedFilliere, setSelectedFilliere] = useState(null);
   useEffect(() => {
-    document.body.style.backgroundColor = "#112655";
     async function fetchData() {
     const reponse = await fetch(`https://podo.b1.ma/api/public/years/${annee}/filieres`);
     const data = await reponse.json();
