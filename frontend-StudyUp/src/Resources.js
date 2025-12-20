@@ -31,17 +31,19 @@ export default function Resources({module,filliere,annee}) {
       <div className="banner"></div>
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {List.map((e,i) => (
+          <a href={`https://podo.b1.ma/api/public/modules/${module}/${e.file_path}`} download={e.title} key={e.id}>
+            {console.log(`https://podo.b1.ma/api/public/modules/${module}/${e.file_path}`)}
           <button
           className="buttonstyle"
             key={e.id}
             style={{...buttonColors[i % 3]}}
-            onClick={() => {setReturn(true)}}
           >
             <div>
             {e.title}
             </div>
             <img src='./images/download.png' alt="download icon"></img>
           </button>
+          </a>
         ))}
         <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
       </div>

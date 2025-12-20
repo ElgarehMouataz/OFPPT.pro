@@ -29,15 +29,24 @@ export default function Modules({filliere,annee}) {
   function buttonMakers(p,x){
     return(
      <>
-        {p.map((e) => (
+        {p.map((e) => {
+          const buttonInsides=(
           <button
             className="buttonstyle"
             key={e.id}
-            onClick={() => {setSelectedModule(e.id);setResources(true)}}
+            onClick={() => {setSelectedModule(e.id);e.name && setResources(true)}}
           >
             {e.name || e.title}
+            {e.title && <img src='./images/download.png' alt="download icon"></img> }
           </button>
-        ))}
+  );
+
+          return (
+          <>
+            {e.title ? <a href={e.file_path} download>{buttonInsides}</a> : buttonInsides}
+          </>
+        );
+        })}
     </>
   )}
   if (showResources) {
