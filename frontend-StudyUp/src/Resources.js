@@ -24,7 +24,7 @@ export default function Resources({module,filliere,annee}) {
   fetchData();
   }, []);
     if (Return) {
-      return <Modules module={module} filliere={filliere} annee={annee}/>;
+      return <Modules module={module} filliere={filliere} annee={annee}/>;  
     }
         return (
     <>
@@ -32,7 +32,6 @@ export default function Resources({module,filliere,annee}) {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {List.map((e,i) => (
           <a href={`https://podo.b1.ma/api/public/modules/${module}/${e.file_path}`} download={e.title} key={e.id}>
-            {console.log(`https://podo.b1.ma/api/public/modules/${module}/${e.file_path}`)}
           <button
           className="buttonstyle"
             key={e.id}
