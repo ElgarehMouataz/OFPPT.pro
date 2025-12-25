@@ -43,7 +43,7 @@ export default function Modules({filliere,annee}) {
 
           return (
           <>
-            {e.title ? <a href={`https://podo.b1.ma/api/public/modules/${filliere}/${e.file_path}`} download>{buttonInsides}</a> : buttonInsides}
+            {e.title ? <a href={`https://podo.b1.ma/storage/${e.file_path}`} download>{buttonInsides}</a> : buttonInsides}
           </>
         );
         })}

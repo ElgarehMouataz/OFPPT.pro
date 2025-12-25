@@ -31,7 +31,7 @@ export default function Resources({module,filliere,annee}) {
       <div className="banner"></div>
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {List.map((e,i) => (
-          <a href={`https://podo.b1.ma/api/public/modules/${module}/${e.file_path}`} download={e.title} key={e.id}>
+          <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id}>
           <button
           className="buttonstyle"
             key={e.id}
