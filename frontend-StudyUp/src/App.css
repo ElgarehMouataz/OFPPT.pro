@@ -55,4 +55,12 @@
   min-Height:60px;
   font-Size:24px;
   font-Family:jura;
-};
+  opacity: 0;
+  animation: fadeIn .5s ease-in forwards;
+  -webkit-animation: fadeIn .5s ease-in forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

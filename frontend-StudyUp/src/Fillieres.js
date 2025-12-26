@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {Helmet} from 'react-helmet'
 import Annee from "./Annee.js";
 import Modules from "./Modules.js";
 const buttonColors=[
@@ -19,6 +20,11 @@ export default function Filliere({annee}) {
     setFilliere(data.data);
   }
   fetchData();
+  
+        document.title="Choix de fillieres d’étude – OFPPT";
+        <Helmet>
+        <meta name="description" content="Sélectionnez votre fillieres d’étude à l’OFPPT afin d’accéder aux formations et programmes disponibles selon votre niveau." />
+  </Helmet>
   }, []);
   if (showModules) {
     return <Modules annee={annee} filliere={selectedFilliere} />;
@@ -38,13 +44,13 @@ export default function Filliere({annee}) {
           <button
             className="buttonstyle"
             key={e.id}
-            style={{...buttonColors[i % 3]}}
+            style={{...buttonColors[i % 3] ,animationDelay: `${i * 0.1}s`}}
             onClick={() => {setSelectedFilliere(e.id);setShowModules(true)}}
           >
             {e.name}
           </button>
         ))}
-        <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
+        {Filliere.length !==0 ? <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button> : null}
       </div>
     </>
   );

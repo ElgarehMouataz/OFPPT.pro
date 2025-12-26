@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {Helmet} from 'react-helmet'
 import Modules from "./Modules.js";
 const buttonColors=[
     {backgroundColor: "#001664"},
@@ -22,6 +23,10 @@ export default function Resources({module,filliere,annee}) {
     setList(cleandata);
   }
   fetchData();
+        document.title="Choix de resource d’étude – OFPPT";
+        <Helmet>
+        <meta name="description" content="Sélectionnez les resources   à l’OFPPT afin d’accéder aux formations et programmes disponibles selon votre niveau." />
+        </Helmet>
   }, []);
     if (Return) {
       return <Modules module={module} filliere={filliere} annee={annee}/>;  
@@ -35,7 +40,7 @@ export default function Resources({module,filliere,annee}) {
           <button
           className="buttonstyle"
             key={e.id}
-            style={{...buttonColors[i % 3]}}
+            style={{...buttonColors[i % 3],animationDelay: `${i * 0.1}s`}}
           >
             <div>
             {e.title}

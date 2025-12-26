@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {Helmet} from 'react-helmet'
 import Resources from "./Resources.js";
 import Filliere from './Fillieres.js'
 
@@ -25,14 +26,19 @@ export default function Modules({filliere,annee}) {
   }
   fetchDataModules();
   fetchDataEFF();
+        document.title="Choix de module – OFPPT";
+        <Helmet>
+        <meta name="description" content="Sélectionnez votre année d’étude à l’OFPPT afin d’accéder aux formations et programmes disponibles selon votre niveau." />
+    </Helmet>
   }, []);
   function buttonMakers(p,x){
     return(
      <>
-        {p.map((e) => {
+        {p.map((e,i) => {
           const buttonInsides=(
           <button
             className="buttonstyle"
+            style={{animationDelay: `${i * 0.1}s`}}
             key={e.id}
             onClick={() => {setSelectedModule(e.id);e.name && setResources(true)}}
           >
@@ -40,7 +46,6 @@ export default function Modules({filliere,annee}) {
             {e.title && <img src='./images/download.png' alt="download icon"></img> }
           </button>
   );
-
           return (
           <>
             {e.title ? <a href={`https://podo.b1.ma/storage/${e.file_path}`} download>{buttonInsides}</a> : buttonInsides}
@@ -63,7 +68,7 @@ export default function Modules({filliere,annee}) {
       </h1>
       <div className='d-flex flex-column align-items-center justify-content-center'>
     {buttonMakers(Modules)} {buttonMakers(EFF)}
-    <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
+    {Filliere.length !==0 ? <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button> : null}
     </div>
     </>
   );
