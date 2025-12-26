@@ -45,6 +45,7 @@
   background-position:center bottom;
 }
 .buttonstyle{
+  opacity: 0;
   margin: 15px;
   padding: 5px;
   border-Radius: 15px;
@@ -55,4 +56,8 @@
   min-Height:60px;
   font-Size:24px;
   font-Family:jura;
-};
+  animation:FadeIn 0.3s ease-in forwards;
+}
+@keyframes FadeIn {
+  to {opacity: 1;}
+}
