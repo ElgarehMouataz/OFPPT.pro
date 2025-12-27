@@ -53,7 +53,7 @@ export default function Filliere({annee}) {
           <button
             className="buttonstyle"
             key={e.id}
-            style={{...buttonColors[i % 3],animationDelay:`${i * 0.1}s`,order:e.id}}
+            style={{...buttonColors[i % 3],animationDelay:`${i * 0.1}s`}}
             onClick={() => {setSelectedFilliere(e.id);setShowModules(true)}}
           >
             {e.name}

@@ -36,7 +36,7 @@ export default function Modules({filliere,annee}) {
           const buttonInsides=(
           <button
             className="buttonstyle"
-            style={{animationDelay:`${i * 0.1}s`,order:e.id}}
+            style={{animationDelay:`${i * 0.1}s`}}
             key={e.id}
             onClick={() => {setSelectedModule(e.id);e.name && setResources(true)}}
           >

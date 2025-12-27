@@ -44,7 +44,7 @@ export default function Resources({module,filliere,annee}) {
           <button
           className="buttonstyle"
             key={e.id}
-            style={{...buttonColors[i % 3],animationDelay:`${i * 0.1}s`,order:e.id}}
+            style={{...buttonColors[i % 3],animationDelay:`${i * 0.1}s`}}
           >
             <div>
             {e.title}
@@ -53,7 +53,7 @@ export default function Resources({module,filliere,annee}) {
           </button>
           </a>
         ))}
-        {List.length !==0 && <button className="buttonstyle" order='last' onClick={() => {setReturn(true)}}>Retourner</button>}
+        {List.length !==0 && <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>}
       </div>
     </>
     
