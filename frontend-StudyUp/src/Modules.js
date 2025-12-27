@@ -29,14 +29,14 @@ export default function Modules({filliere,annee}) {
   fetchDataModules();
   fetchDataEFF();
   }, [filliere]);
-  function buttonMakers(p,x){
+  function buttonMakers(p){
     return(
      <>
         {p.map((e,i) => {
           const buttonInsides=(
           <button
             className="buttonstyle"
-            style={{animationDelay:`${i * 0.1}s`}}
+            style={{animationDelay:`${i * 0.1}s`,order:e.id}}
             key={e.id}
             onClick={() => {setSelectedModule(e.id);e.name && setResources(true)}}
           >

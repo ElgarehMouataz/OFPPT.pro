@@ -35,7 +35,7 @@ export default function Annee() {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {annee.map((e,i) => (
           <button className="buttonstyle"
-            style={{animationDelay:`${i * 0.1}s`}}
+            style={{animationDelay:`${i * 0.1}s`,order:e.id}}
             key={e.id}
             onClick={() => {setSelectedAnnee(e.id);setShowFilliere(true); }}>
             {e.name}
