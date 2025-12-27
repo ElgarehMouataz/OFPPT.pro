@@ -53,7 +53,7 @@ export default function Resources({module,filliere,annee}) {
           </button>
           </a>
         ))}
-        {List.length !==0 && <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>}
+        {List.length !==0 && <button className="buttonstyle" order='last' onClick={() => {setReturn(true)}}>Retourner</button>}
       </div>
     </>
     
