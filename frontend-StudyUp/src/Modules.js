@@ -71,7 +71,7 @@ export default function Modules({filliere,annee}) {
           </button>
           </Link>
           );
-
+          //TODO : fix download for modules with file_path , Currently redirects to Resources page
           return (
           <>
             {e.title ? <a href={`https://podo.b1.ma/storage/${e.file_path}`}>{buttonInsides}</a> : buttonInsides}
