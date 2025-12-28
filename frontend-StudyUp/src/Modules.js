@@ -3,7 +3,7 @@ import Resources from "./Resources.js";
 import Filliere from './Fillieres.js'
 import {Helmet} from "react-helmet-async";
 import styled from "styled-components"
-
+import { Link ,useParams } from "react-router-dom";
 
 export default function Modules({filliere,annee}) {
 
@@ -13,7 +13,8 @@ export default function Modules({filliere,annee}) {
   const [EFF, setEFF] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
   const [mounted, setMounted] = useState(false);
-    const [showEmptyMessage, setShowEmptyMessage] = useState(false);
+  const [showEmptyMessage, setShowEmptyMessage] = useState(false);
+  const {id:filliereid} = useParams();  
   const Spinner = styled.div`
   opacity :0;
   border: 16px solid #5373e9ff;
@@ -39,14 +40,14 @@ export default function Modules({filliere,annee}) {
   useEffect(() => {
     setMounted(true)
     async function fetchDataModules() {
-    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliere}/modules`);
+    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliereid}/modules`);
     const data = await reponse.json();
     setModules(data.data);
 
   }
 
   async function fetchDataEFF() {
-    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliere}/effs`);
+    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliereid}/effs`);
     const data = await reponse.json();
     setEFF(data.data);
   }
@@ -66,6 +67,7 @@ export default function Modules({filliere,annee}) {
      <>
         {p.map((e,i) => {
           const buttonInsides=(
+            <Link to={`/Annees/Fillieres/Modules/${e.id}/Resources`}>
           <button
             className="buttonstyle"
             style={{animationDelay:`${i * 0.1}s`}}
@@ -75,11 +77,12 @@ export default function Modules({filliere,annee}) {
             {e.name || e.title}
             {e.title && <img src="./images/download.png" alt="download icon"></img> }
           </button>
-  );
+          </Link>
+          );
 
           return (
           <>
-            {e.title ? <a href={`https://podo.b1.ma/storage/${e.file_path}`} download>{buttonInsides}</a> : buttonInsides}
+            {e.title ? <a href={`https://podo.b1.ma/storage/${e.file_path}`}>{buttonInsides}</a> : buttonInsides}
           </>
         );
         })}

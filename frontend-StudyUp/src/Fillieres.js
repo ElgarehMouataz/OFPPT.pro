@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Annee from "./Annee.js";
 import {Helmet} from "react-helmet-async";
-import Modules from "./Modules.js";
 import styled from "styled-components"
+import { Link ,useParams } from "react-router-dom";
 const buttonColors=[
     {backgroundColor: "#001664"},
     {backgroundColor: "#001251"},
@@ -16,6 +16,7 @@ export default function Filliere({annee}) {
   const [selectedFilliere, setSelectedFilliere] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [showEmptyMessage, setShowEmptyMessage] = useState(false);
+  const {id:anneeid} = useParams();
   const Spinner = styled.div`
   opacity :0;
   border: 16px solid #5373e9ff;
@@ -41,7 +42,7 @@ export default function Filliere({annee}) {
   useEffect(() => {
     setMounted(true) 
     async function fetchData() {
-    const reponse = await fetch(`https://podo.b1.ma/api/public/years/${annee}/filieres`);
+    const reponse = await fetch(`https://podo.b1.ma/api/public/years/${anneeid}/filieres`);
     const data = await reponse.json();
     setFilliere(data.data);
   }
@@ -55,9 +56,9 @@ export default function Filliere({annee}) {
   }, 5000);
   return () => clearTimeout(timer);
 }, [Filliere]);
-  if (showModules) {
+  /*if (showModules) {
     return (<div key="modules-view"><Modules annee={annee} filliere={selectedFilliere} /></div>);
-  }
+  }*/
   if (Return) {
     return(
     <div key="annee-return-view">
@@ -80,6 +81,7 @@ export default function Filliere({annee}) {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {Filliere.length===0 && !showEmptyMessage && <Spinner/>}
         {Filliere.map((e,i) => (
+          <Link to={`/Annees/Fillieres/${e.id}/Modules`}>
           <button
             className="buttonstyle"
             key={e.id}
@@ -88,6 +90,7 @@ export default function Filliere({annee}) {
           >
             {e.name}
           </button>
+          </Link>
         ))}
         {showEmptyMessage && Filliere.length === 0 && (
         <div className="d-flex flex-column align-items-center justify-content-center"> 

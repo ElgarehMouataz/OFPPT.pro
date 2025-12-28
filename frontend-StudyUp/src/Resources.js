@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Modules from "./Modules.js";
 import {Helmet} from "react-helmet-async";
 import styled from "styled-components"
+import { Link ,useParams } from "react-router-dom";
 const buttonColors=[
     {backgroundColor: "#001664"},
     {backgroundColor: "#001251"},
@@ -13,6 +14,7 @@ export default function Resources({module,filliere,annee}) {
   const [List, setList] = useState([]);
   const [mounted, setMounted] = useState(false);
   const [showEmptyMessage, setShowEmptyMessage] = useState(false);
+   const {id:moduleid} = useParams();  
   const Spinner = styled.div`
   opacity :0;
   margin-top:20px;
@@ -39,9 +41,9 @@ export default function Resources({module,filliere,annee}) {
 
   useEffect(() => {
     setMounted(true)
-    const APIS=[`https://podo.b1.ma/api/public/modules/${module}/courses`,
-                `https://podo.b1.ma/api/public/modules/${module}/ccs`,
-                `https://podo.b1.ma/api/public/modules/${module}/efms`,
+    const APIS=[`https://podo.b1.ma/api/public/modules/${moduleid}/courses`,
+                `https://podo.b1.ma/api/public/modules/${moduleid}/ccs`,
+                `https://podo.b1.ma/api/public/modules/${moduleid}/efms`,
 ]
     async function fetchData() {
     const reponse = await Promise.all(APIS.map((api)=>fetch(api)));
