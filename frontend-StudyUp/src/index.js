@@ -11,11 +11,11 @@ import { HelmetProvider } from 'react-helmet-async';
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 
 const router = createBrowserRouter([
-{path: "/", element:<App/>},
+{path: "/Annees", element:<App/>},
 {path: "/Annees", element:<Annee/>},
-{path: "/Annees/:id/Fillieres", element:<Filliere/>},
-{path: "/Annees/Fillieres/:id/Modules", element:<Module/>},
-{path: "/Annees/Fillieres/Modules/:id/Resources", element:<Resources/>}
+{path: "/Annees/:anneeId/Fillieres", element:<Filliere/>},
+{path: "/Annees/:anneeId/Fillieres/:filliereId/Modules", element:<Module/>},
+{path: "/Annees/:anneeId/Fillieres/:filliereId/Modules/:moduleId/Resources", element:<Resources/>}
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

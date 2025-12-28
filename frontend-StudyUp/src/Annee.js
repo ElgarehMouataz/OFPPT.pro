@@ -15,9 +15,6 @@ export default function Annee() {
   }
   fetchData();
    }, []);
-  /*if (showFilliere) {
-    return(<div key="filliere-view"> <Filliere annee={selectedAnnee}/>  </div> );
-  }*/
   return (
     <div key="annee-view">
 

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import Modules from "./Modules.js";
 import {Helmet} from "react-helmet-async";
 import styled from "styled-components"
-import { Link ,useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 const buttonColors=[
     {backgroundColor: "#001664"},
     {backgroundColor: "#001251"},
@@ -10,11 +9,10 @@ const buttonColors=[
 ]
 
 export default function Resources({module,filliere,annee}) {
-  const [Return, setReturn] = useState(false);
   const [List, setList] = useState([]);
-  const [mounted, setMounted] = useState(false);
   const [showEmptyMessage, setShowEmptyMessage] = useState(false);
-   const {id:moduleid} = useParams();  
+  const navigate = useNavigate();
+   const {moduleId} = useParams();  
   const Spinner = styled.div`
   opacity :0;
   margin-top:20px;
@@ -40,10 +38,9 @@ export default function Resources({module,filliere,annee}) {
 `;
 
   useEffect(() => {
-    setMounted(true)
-    const APIS=[`https://podo.b1.ma/api/public/modules/${moduleid}/courses`,
-                `https://podo.b1.ma/api/public/modules/${moduleid}/ccs`,
-                `https://podo.b1.ma/api/public/modules/${moduleid}/efms`,
+    const APIS=[`https://podo.b1.ma/api/public/modules/${moduleId}/courses`,
+                `https://podo.b1.ma/api/public/modules/${moduleId}/ccs`,
+                `https://podo.b1.ma/api/public/modules/${moduleId}/efms`,
 ]
     async function fetchData() {
     const reponse = await Promise.all(APIS.map((api)=>fetch(api)));
@@ -61,17 +58,12 @@ export default function Resources({module,filliere,annee}) {
     }, 5000);
     return () => clearTimeout(timer);
   }, [List]);
-    if (Return) {
-      return <Modules module={module} filliere={filliere} annee={annee}/>;  
-    }
         return (
     <>
-     {mounted && (
     <Helmet>
           <title>StudyUp - Resources</title>
           <meta name="description" content="Choisissez votre année d'étude pour accéder aux ressources académiques sur StudyUp." />
         </Helmet>
-     )}
       <div className="banner"></div>
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {List.length===0 && !showEmptyMessage && <Spinner/>}
@@ -85,7 +77,7 @@ export default function Resources({module,filliere,annee}) {
             <div>
             {e.title}
             </div>
-            <img src='./images/download.png' alt="download icon"></img>
+            <img src='/images/download.png' alt="download icon"></img>
           </button>
           </a>
         ))}
@@ -94,10 +86,10 @@ export default function Resources({module,filliere,annee}) {
                   <h2 style={{color:"#001c83ff", marginTop:'40px', fontFamily:'jura', textAlign:'center'}}>
                     Aucune Information disponible pour cette option.
                   </h2>
-                  <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
+                  <button className="buttonstyle"  onClick={() => navigate(-1)}>Retourner</button>
                 </div >
         )}
-        {List.length !==0 && <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>}
+        {List.length !==0 && <button className="buttonstyle"  onClick={() => navigate(-1)}>Retourner</button>}
       </div>
     </>
     

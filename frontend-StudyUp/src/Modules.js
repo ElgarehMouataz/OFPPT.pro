@@ -1,20 +1,14 @@
 import { useState, useEffect } from "react";
-import Resources from "./Resources.js";
-import Filliere from './Fillieres.js'
 import {Helmet} from "react-helmet-async";
 import styled from "styled-components"
-import { Link ,useParams } from "react-router-dom";
+import { Link ,useParams ,useNavigate} from "react-router-dom";
 
 export default function Modules({filliere,annee}) {
-
-  const [showResources, setResources] = useState(false);
-  const [Return, setReturn] = useState(false);
   const [Modules, setModules] = useState([]);
   const [EFF, setEFF] = useState([]);
-  const [selectedModule, setSelectedModule] = useState(null);
-  const [mounted, setMounted] = useState(false);
   const [showEmptyMessage, setShowEmptyMessage] = useState(false);
-  const {id:filliereid} = useParams();  
+  const {anneeId,filliereId} = useParams();  
+  const navigate = useNavigate();
   const Spinner = styled.div`
   opacity :0;
   border: 16px solid #5373e9ff;
@@ -38,16 +32,15 @@ export default function Modules({filliere,annee}) {
 }
 `;
   useEffect(() => {
-    setMounted(true)
     async function fetchDataModules() {
-    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliereid}/modules`);
+    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/modules`);
     const data = await reponse.json();
     setModules(data.data);
 
   }
 
   async function fetchDataEFF() {
-    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliereid}/effs`);
+    const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`);
     const data = await reponse.json();
     setEFF(data.data);
   }
@@ -67,15 +60,14 @@ export default function Modules({filliere,annee}) {
      <>
         {p.map((e,i) => {
           const buttonInsides=(
-            <Link to={`/Annees/Fillieres/Modules/${e.id}/Resources`}>
+            <Link to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`}>
           <button
             className="buttonstyle"
             style={{animationDelay:`${i * 0.1}s`}}
             key={e.id}
-            onClick={() => {setSelectedModule(e.id);e.name && setResources(true)}}
           >
             {e.name || e.title}
-            {e.title && <img src="./images/download.png" alt="download icon"></img> }
+            {e.title && <img src="/images/download.png" alt="download icon"></img> }
           </button>
           </Link>
           );
@@ -88,20 +80,12 @@ export default function Modules({filliere,annee}) {
         })}
     </>
   )}
-  if (showResources) {
-    return <Resources filliere={filliere} annee={annee} module={selectedModule}/>;
-  }
-   if (Return) {
-    return <Filliere annee={annee} filliere={filliere}/>;
-  }
   return (
     <>
-     {mounted && (
     <Helmet>
           <title>StudyUp - Modules</title>
           <meta name="description" content="Choisissez votre année d'étude pour accéder aux ressources académiques sur StudyUp." />
         </Helmet>
-     )}
   <div className="banner"></div>
       <h1 style={{color:"#001c83ff", marginLeft:'10px', marginTop:'40px', fontFamily:'jura'}}>
         Preparation module:
@@ -114,10 +98,10 @@ export default function Modules({filliere,annee}) {
           <h2 style={{color:"#001c83ff", marginTop:'40px', fontFamily:'jura', textAlign:'center'}}>
             Aucune Information disponible pour cette option.
           </h2>
-          <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
+        <button className="buttonstyle" onClick={() => navigate(-1)}>Retourner</button>
         </div >
 )}
-    {Modules.length !==0 && <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>}
+    {Modules.length !==0 && <button className="buttonstyle" onClick={() => navigate(-1)}>Retourner</button>}
     </div>
     </>
   );
