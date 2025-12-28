@@ -60,7 +60,7 @@ export default function Modules({filliere,annee}) {
      <>
         {p.map((e,i) => {
           const buttonInsides=(
-            <Link to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`}>
+            
           <button
             className="buttonstyle"
             style={{animationDelay:`${i * 0.1}s`}}
@@ -69,12 +69,11 @@ export default function Modules({filliere,annee}) {
             {e.name || e.title}
             {e.title && <img src="/images/download.png" alt="download icon"></img> }
           </button>
-          </Link>
           );
-          //TODO : fix download for modules with file_path , Currently redirects to Resources page
           return (
           <>
-            {e.title ? <a href={`https://podo.b1.ma/storage/${e.file_path}`}>{buttonInsides}</a> : buttonInsides}
+            {e.title ? <a href={`https://podo.b1.ma/storage/${e.file_path}`}>{buttonInsides}</a> :
+            <Link to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`}> {buttonInsides}  </Link>}
           </>
         );
         })}

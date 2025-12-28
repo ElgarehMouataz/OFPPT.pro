@@ -11,7 +11,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 
 const router = createBrowserRouter([
-{path: "/Annees", element:<App/>},
+{path: "/", element:<App/>},
 {path: "/Annees", element:<Annee/>},
 {path: "/Annees/:anneeId/Fillieres", element:<Filliere/>},
 {path: "/Annees/:anneeId/Fillieres/:filliereId/Modules", element:<Module/>},
