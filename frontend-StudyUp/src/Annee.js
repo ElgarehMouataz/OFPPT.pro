@@ -6,7 +6,7 @@ export default function Annee() {
   const [annee, setAnnee] = useState([]);
   const [selectedAnnee, setSelectedAnnee] = useState(null);
   const [mounted, setMounted] = useState(false);
-  
+    
   useEffect(() => {
     setMounted(true);
     async function fetchData() {
@@ -17,9 +17,9 @@ export default function Annee() {
   }
   fetchData();
    }, []);
-  if (showFilliere) {
+  /*if (showFilliere) {
     return(<div key="filliere-view"> <Filliere annee={selectedAnnee}/>  </div> );
-  }
+  }*/
   return (
     <div key="annee-view">
        {mounted && (

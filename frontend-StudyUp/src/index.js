@@ -2,14 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Annee from './Annee';
+import Filliere from './Fillieres';
+import Module from './Modules';
+import Resources from './Resources';
 import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from 'react-helmet-async';
+import {createBrowserRouter,RouterProvider} from "react-router-dom";
+
+const router = createBrowserRouter([
+{path: "/", element:<App/>},
+{path: "/Annees", element:<Annee/>},
+{path: "/Annees/:id/Fillieres", element:<Filliere/>},
+{path: "/Annees/Fillieres/:id/Modules", element:<Module/>},
+{path: "/Annees/Fillieres/Modules/:id/Resources", element:<Resources/>}
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
      <HelmetProvider>
-    <App />
+    <RouterProvider router={router} />
     </HelmetProvider>
   </React.StrictMode>
 );

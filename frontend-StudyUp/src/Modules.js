@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Resources from "./Resources.js";
 import Filliere from './Fillieres.js'
 import {Helmet} from "react-helmet-async";
-
+import styled from "styled-components"
 
 
 export default function Modules({filliere,annee}) {
@@ -13,6 +13,29 @@ export default function Modules({filliere,annee}) {
   const [EFF, setEFF] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
   const [mounted, setMounted] = useState(false);
+    const [showEmptyMessage, setShowEmptyMessage] = useState(false);
+  const Spinner = styled.div`
+  opacity :0;
+  border: 16px solid #5373e9ff;
+  border-top: 16px #d6d6d6d3  solid;
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  animation: spin 2s linear infinite, appear .3s ease-in forwards; 
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+    @keyframes appear {
+    to {
+      opacity: 1;
+}
+`;
   useEffect(() => {
     setMounted(true)
     async function fetchDataModules() {
@@ -21,6 +44,7 @@ export default function Modules({filliere,annee}) {
     setModules(data.data);
 
   }
+
   async function fetchDataEFF() {
     const reponse = await fetch(`https://podo.b1.ma/api/public/filieres/${filliere}/effs`);
     const data = await reponse.json();
@@ -29,6 +53,14 @@ export default function Modules({filliere,annee}) {
   fetchDataModules();
   fetchDataEFF();
   }, [filliere]);
+    useEffect(() => {
+  const timer = setTimeout(() => {
+    if (Modules.length === 0) {
+      setShowEmptyMessage(true);
+    }
+  }, 5000);
+  return () => clearTimeout(timer);
+}, [Modules]);
   function buttonMakers(p){
     return(
      <>
@@ -41,7 +73,7 @@ export default function Modules({filliere,annee}) {
             onClick={() => {setSelectedModule(e.id);e.name && setResources(true)}}
           >
             {e.name || e.title}
-            {e.title && <img src='./images/download.png' alt="download icon"></img> }
+            {e.title && <img src="./images/download.png" alt="download icon"></img> }
           </button>
   );
 
@@ -72,7 +104,16 @@ export default function Modules({filliere,annee}) {
         Preparation module:
       </h1>
       <div className='d-flex flex-column align-items-center justify-content-center'>
+        {Modules.length===0 && !showEmptyMessage && <Spinner/>}
     {buttonMakers(Modules)} {buttonMakers(EFF)}
+    {showEmptyMessage && Modules.length === 0 && (
+        <div className="d-flex flex-column align-items-center justify-content-center"> 
+          <h2 style={{color:"#001c83ff", marginTop:'40px', fontFamily:'jura', textAlign:'center'}}>
+            Aucune Information disponible pour cette option.
+          </h2>
+          <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>
+        </div >
+)}
     {Modules.length !==0 && <button className="buttonstyle" onClick={() => {setReturn(true)}}>Retourner</button>}
     </div>
     </>
