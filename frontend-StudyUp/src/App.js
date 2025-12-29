@@ -1,6 +1,6 @@
 
 import './App.css';
-import Annee from './Components/Annee.js';
+import Annee from './Annee.js';
 function App() {
   return (
   <Annee />
