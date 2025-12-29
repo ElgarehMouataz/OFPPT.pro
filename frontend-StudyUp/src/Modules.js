@@ -51,7 +51,7 @@ export default function Modules({ filliere, annee }) {
     const timer = setTimeout(() => {
       if (Modules.length === 0) {
         setShowEmptyMessage(true);
-      }
+      } 
     }, 5000);
     return () => clearTimeout(timer);
   }, [Modules]);
