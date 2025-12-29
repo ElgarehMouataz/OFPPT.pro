@@ -8,21 +8,21 @@ import Module from './screens/Modules';
 import Resources from './screens/Resources';
 import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from 'react-helmet-async';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/Annees", element: <Annee /> },
-  { path: "/Annees/:anneeId/Fillieres", element: <Filliere /> },
-  { path: "/Annees/:anneeId/Fillieres/:filliereId/Modules", element: <Module /> },
-  { path: "/Annees/:anneeId/Fillieres/:filliereId/Modules/:moduleId/Resources", element: <Resources /> }
-]);
+import { Routes,Route,BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element= {<App />}/>
+        <Route path="/Annees" element= {<Annee />}/>
+        <Route path="/Annees/:anneeId/Fillieres" element= {<Filliere />} />
+        <Route path="/Annees/:anneeId/Fillieres/:filliereId/Modules" element= {<Module />}/>
+        <Route path="/Annees/:anneeId/Fillieres/:filliereId/Modules/:moduleId/Resources" element= {<Resources />}/>
+      </Routes>
+      </BrowserRouter>
     </HelmetProvider>
   </React.StrictMode>
 );
