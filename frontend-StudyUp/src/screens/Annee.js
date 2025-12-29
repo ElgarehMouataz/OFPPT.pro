@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import Buttons from "../components/Buttons"
 export default function Annee() {
   const [annee, setAnnee] = useState([]);
 
 
 
   useEffect(() => {
-    async function fetchData() {
-      const reponse = await fetch("https://podo.b1.ma/api/public/years");
-      const data = await reponse.json();
-      setAnnee(data.data);
-
-    }
-    fetchData();
-  }, []);
+      fetch("https://podo.b1.ma/api/public/years").then(res =>res.json()).then(res=>setAnnee(res.data)).catch(console.log({annee}))
+  }, [annee]);
   return (
     <div key="annee-view">
 
@@ -29,11 +24,7 @@ export default function Annee() {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {annee.map((e, i) => (
           <Link to={`Annees/${e.id}/Fillieres`}>
-            <button className="buttonstyle"
-              style={{ animationDelay: `${i * 0.1}s` }}
-              key={e.id}>
-              {e.name}
-            </button>
+            <Buttons element={e} index={i} />
           </Link>
         ))}
       </div>
