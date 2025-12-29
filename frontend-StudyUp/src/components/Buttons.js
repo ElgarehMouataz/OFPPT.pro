@@ -4,9 +4,8 @@ export default function Buttons({element,index}) {
             <button
               className="buttonstyle"
               style={{ animationDelay: `${index * 0.1}s` }}
-              key={element.id}
-            >
-              {element.name || element.title}<br/>
+              key={element.id}>
+              {element.name || element.title}
               {element.title && <img src="/images/download.png" alt="download icon"></img>}
             </button>
             </>
