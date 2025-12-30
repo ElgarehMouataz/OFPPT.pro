@@ -8,23 +8,38 @@ const themes = {
     background: "#F5F7FA",
     buttonstyle:{
         backgroundColor: '#314EB7',
-        color: 'white',
+        color: '#F5F7FA',
         },
     text: "#1F3C88",
+    icon:{backgroundImage:"url(/images/darkMode.png)",
+         backgroundSize:"70%",
+        backgroundRepeat:"no-repeat",
+        backgroundPosition:"center",
+        backgroundColor:'#008acaff'
+    }
   },
   dark: {
-    background: "#0B1020",
+    background: "#010514ff",
     buttonstyle:{
-        backgroundColor: '#008acaff',
-        color: 'black',
+        backgroundColor: '#314eb7ff',
+        color: 'white',
         },
     text: "#ffffffff",
+    icon:{backgroundImage:"url(/images/lightMode.png)",
+        backgroundSize:"70%",
+        backgroundRepeat:"no-repeat",
+        backgroundPosition:"center",
+        backgroundColor:'#314EB7'
+
+    }
   },
 };
 
 export default function ThemeProvider({ children }) {
-  const [mode, setMode] = useState("dark");
-
+  const [mode, setMode] = useState("light");
+  useEffect(() => {
+    document.body.style.backgroundColor = themes[mode].background;
+  }, [mode]);
   const toggleTheme = () =>
     setMode((prev) => (prev === "light" ? "dark" : "light"));
 
