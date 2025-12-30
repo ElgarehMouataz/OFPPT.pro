@@ -17,7 +17,7 @@ export default function Modules() {
 fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/modules`).then(res =>res.json()).then(res=>setModules(res.data)).catch(console.log({Modules}));
 fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>res.json()).then(res=>setEFF(res.data)).catch(console.log({EFF}));
 
-  }, [filliereId,EFF,Modules]);
+  }, [filliereId]);
   return (
     <>
       <Helmet>

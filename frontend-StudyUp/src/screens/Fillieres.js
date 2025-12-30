@@ -12,7 +12,7 @@ export default function Filliere() {
    const { colors} = useTheme();
   useEffect(() => {
   fetch(`https://podo.b1.ma/api/public/years/${anneeId}/filieres`).then(res =>res.json()).then(res=>setFilliere(res.data)).catch(console.log({Filliere}));
-  }, [anneeId,Filliere]);
+  }, [anneeId]);
   return (
     <div key="filliere-main-view">
       <Helmet >
