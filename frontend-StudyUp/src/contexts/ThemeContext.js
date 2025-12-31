@@ -15,7 +15,7 @@ const themes = {
          backgroundSize:"70%",
         backgroundRepeat:"no-repeat",
         backgroundPosition:"center",
-        backgroundColor:'#008acaff'
+        backgroundColor:'#008acaff',
     }
   },
   dark: {
@@ -29,7 +29,8 @@ const themes = {
         backgroundSize:"70%",
         backgroundRepeat:"no-repeat",
         backgroundPosition:"center",
-        backgroundColor:'#314EB7'
+        backgroundColor:'#314EB7',
+        order:'1'
 
     }
   },
