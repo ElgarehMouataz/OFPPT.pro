@@ -28,7 +28,7 @@ export default function Resources() {
     <>
       <Helmet>
         <title>StudyUp - Resources</title>
-        <meta name="description" content={List.map(e => e.name + " " + e.code)} />
+        <meta name="description" content={List.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner />
       <div className='d-flex flex-column align-items-center justify-content-center'>
@@ -38,7 +38,6 @@ export default function Resources() {
            <Buttons element={e} index={i} />
           </a>
         ))}
-        {List.length !== 0 && <button className="buttonstyle" style={{...colors.buttonstyle}} onClick={() => navigate(-1)}>Retourner</button>}
       </div>
     </>
   )

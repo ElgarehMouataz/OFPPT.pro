@@ -22,7 +22,7 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
     <>
       <Helmet>
         <title>StudyUp - Modules</title>
-        <meta name="description" content={Modules.concat(EFF).map(e => e.name + " " + e.code)} />
+        <meta name="description" content={Modules.concat(EFF).map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner />
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura'  }}>
@@ -31,7 +31,7 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
       <div className='d-flex flex-column align-items-center justify-content-center'>
       <ShowEmptyMessage dataList={Modules.concat(EFF)} />
         {Modules.map((e,i)=>{return(
-          <Link to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`} state={e} style={{textDecoration:"none"}}>
+          <Link key={e.id} to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`} state={e} style={{textDecoration:"none"}}>
           <Buttons element={e} index={i} />
           </Link>
           )
@@ -41,7 +41,6 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
           <Buttons element={e} index={i} />
           </a>
         )})}
-        {Modules.concat(EFF).length !== 0 && <button className="buttonstyle" style={{...colors.buttonstyle}} onClick={() => navigate(-1)}>Retourner</button>}
       </div>
     </>
   );

@@ -17,7 +17,7 @@ export default function Filliere() {
     <div key="filliere-main-view">
       <Helmet >
         <title></title>
-        <meta name="description" content={Filliere.map(e => e.name + " " + e.code)} />
+        <meta name="description" content={Filliere.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner/>
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
@@ -26,11 +26,10 @@ export default function Filliere() {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         <ShowEmptyMessage dataList={Filliere} />
         {Filliere.map((e, i) => (
-          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}}>
+          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}} key={e.id}>
            <Buttons element={e} index={i} />
           </Link>
         ))}
-        {Filliere.length !== 0 && <button className="buttonstyle" style={{...colors.buttonstyle}} onClick={() => navigate(-1)}>Retourner</button>}
       </div>
     </div>
   );

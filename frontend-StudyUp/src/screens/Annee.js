@@ -15,7 +15,7 @@ export default function Annee() {
 
       <Helmet>
         <title>StudyUp - Année</title>
-        <meta name="description" content={annee.map(e => e.name + " " + e.code)} />
+        <meta name="description" content={annee.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner />
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
@@ -23,7 +23,7 @@ export default function Annee() {
       </h1>
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {annee.map((e, i) => (
-          <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}}> 
+          <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id}> 
             <Buttons element={e} index={i} />
           </Link>
         ))}
