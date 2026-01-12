@@ -9,13 +9,13 @@ export default function Annee() {
   const { colors} = useTheme();
   useEffect(() => {
       fetch("https://podo.b1.ma/api/public/years").then(res =>res.json()).then(res=>setAnnee(res.data)).catch(console.log())
-  }, [annee]);
+  }, []);
   return (
     <div key="annee-view">
 
       <Helmet>
         <title>StudyUp - Année</title>
-        <meta name="description" content="Choisissez votre année d'étude pour accéder aux ressources académiques sur StudyUp." />
+        <meta name="description" content={annee.map(e => e.name + " " + e.code)} />
       </Helmet>
       <Banner />
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
@@ -23,7 +23,7 @@ export default function Annee() {
       </h1>
       <div className='d-flex flex-column align-items-center justify-content-center'>
         {annee.map((e, i) => (
-          <Link to={`Annees/${e.id}/Fillieres`}>
+          <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}}> 
             <Buttons element={e} index={i} />
           </Link>
         ))}

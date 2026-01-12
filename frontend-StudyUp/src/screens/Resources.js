@@ -28,13 +28,13 @@ export default function Resources() {
     <>
       <Helmet>
         <title>StudyUp - Resources</title>
-        <meta name="description" content="Choisissez votre année d'étude pour accéder aux ressources académiques sur StudyUp." />
+        <meta name="description" content={List.map(e => e.name + " " + e.code)} />
       </Helmet>
       <Banner />
       <div className='d-flex flex-column align-items-center justify-content-center'>
          <ShowEmptyMessage dataList={List} />
         {List.map((e, i) => (
-          <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id}>
+          <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id} style={{textDecoration:"none"}}>
            <Buttons element={e} index={i} />
           </a>
         ))}

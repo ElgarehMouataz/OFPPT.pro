@@ -16,8 +16,8 @@ export default function Filliere() {
   return (
     <div key="filliere-main-view">
       <Helmet >
-        <title>StudyUp - Fillieres</title>
-        <meta name="description" content="Choisissez votre filliere d'étude pour accéder aux ressources académiques sur StudyUp." />
+        <title></title>
+        <meta name="description" content={Filliere.map(e => e.name + " " + e.code)} />
       </Helmet>
       <Banner/>
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
@@ -26,7 +26,7 @@ export default function Filliere() {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         <ShowEmptyMessage dataList={Filliere} />
         {Filliere.map((e, i) => (
-          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`}>
+          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}}>
            <Buttons element={e} index={i} />
           </Link>
         ))}

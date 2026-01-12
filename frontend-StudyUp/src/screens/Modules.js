@@ -22,7 +22,7 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
     <>
       <Helmet>
         <title>StudyUp - Modules</title>
-        <meta name="description" content="Choisissez votre année d'étude pour accéder aux ressources académiques sur StudyUp." />
+        <meta name="description" content={Modules.concat(EFF).map(e => e.name + " " + e.code)} />
       </Helmet>
       <Banner />
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura'  }}>
@@ -31,13 +31,13 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
       <div className='d-flex flex-column align-items-center justify-content-center'>
       <ShowEmptyMessage dataList={Modules.concat(EFF)} />
         {Modules.map((e,i)=>{return(
-          <Link to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`}>
+          <Link to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`} state={e} style={{textDecoration:"none"}}>
           <Buttons element={e} index={i} />
           </Link>
           )
         })}
         {EFF.map((e,i)=>{return (
-           <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id}>
+           <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id} >
           <Buttons element={e} index={i} />
           </a>
         )})}
