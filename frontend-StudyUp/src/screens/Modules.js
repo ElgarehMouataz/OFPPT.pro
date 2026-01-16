@@ -14,14 +14,14 @@ export default function Modules() {
   const { anneeId, filliereId } = useParams();
    const { colors} = useTheme();
   useEffect(() => {
-fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/modules`).then(res =>res.json()).then(res=>setModules(res.data)).catch(console.log({Modules}));
-fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>res.json()).then(res=>setEFF(res.data)).catch(console.log({EFF}));
+fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/modules`).then(res =>res.json()).then(res=>setModules(res.data)).catch(console.log('erreur fetch'));
+fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>res.json()).then(res=>setEFF(res.data)).catch(console.log('erreur fetch'));
 
   }, [filliereId]);
   return (
     <>
       <Helmet>
-        <title>StudyUp - Modules</title>
+        <title>{state.name} {state.code}</title>
         <meta name="description" content={Modules.concat(EFF).map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner />

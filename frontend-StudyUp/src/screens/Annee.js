@@ -8,7 +8,7 @@ export default function Annee() {
   const [annee, setAnnee] = useState([]);
   const { colors} = useTheme();
   useEffect(() => {
-      fetch("https://podo.b1.ma/api/public/years").then(res =>res.json()).then(res=>setAnnee(res.data)).catch(console.log())
+      fetch("https://podo.b1.ma/api/public/years").then(res =>res.json()).then(res=>setAnnee(res.data)).catch(console.log("erreur fetch"));
   }, []);
   return (
     <div key="annee-view">
@@ -23,7 +23,7 @@ export default function Annee() {
       <div className='d-flex justify-content-center'>
         <div className="d-flex flex-wrap justify-content-center w-75">
         {annee.map((e, i) => (
-          <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id} state={e}>  
+          <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id}>
             <Buttons element={e} index={i} />
           </Link>
         ))}

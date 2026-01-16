@@ -12,12 +12,12 @@ export default function Filliere() {
   const { anneeId } = useParams();
    const { colors} = useTheme();
   useEffect(() => {
-  fetch(`https://podo.b1.ma/api/public/years/${anneeId}/filieres`).then(res =>res.json()).then(res=>setFilliere(res.data)).catch(console.log({Filliere}));
+  fetch(`https://podo.b1.ma/api/public/years/${anneeId}/filieres`).then(res =>res.json()).then(res=>setFilliere(res.data)).catch(console.log("erreur fetch"));
   }, [anneeId]);
   return (
     <div key="filliere-main-view">
       <Helmet >
-        <title>StudyUp-Filliere</title>
+        <title>{state.name}</title>
         <meta name="description" content={Filliere.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner/>
@@ -28,7 +28,7 @@ export default function Filliere() {
         <div className="d-flex flex-wrap justify-content-center w-75">
         <ShowEmptyMessage dataList={Filliere} />
         {Filliere.map((e, i) => (
-          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}} key={e.id} state={e}>
+          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}} key={e.id}>
            <Buttons element={e} index={i} />
           </Link>
         ))}
