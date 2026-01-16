@@ -4,28 +4,30 @@ import Buttons from "../components/Buttons"
 import Banner from '../components/Banner.js';
 import ShowEmptyMessage from "../components/showEmptyMessage.js";
 import  {useTheme }  from "../contexts/ThemeContext.js";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation} from "react-router-dom";
 export default function Filliere() {
   const [Filliere, setFilliere] = useState([]);
+  const location = useLocation();
+  const state = location.state;
   const { anneeId } = useParams();
    const { colors} = useTheme();
   useEffect(() => {
   fetch(`https://podo.b1.ma/api/public/years/${anneeId}/filieres`).then(res =>res.json()).then(res=>setFilliere(res.data)).catch(console.log({Filliere}));
-  }, []);
+  }, [anneeId]);
   return (
     <div key="filliere-main-view">
       <Helmet >
-        <title></title>
+        <title>StudyUp-</title>
         <meta name="description" content={Filliere.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner/>
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
-        Choisir votre filliere :
+        {state.name} {state.code}
       </h1>
-      <div className='d-flex flex-wrap align-items-center justify-content-center'>
+      <div className='d-flex flex-column align-items-center justify-content-start'>
         <ShowEmptyMessage dataList={Filliere} />
         {Filliere.map((e, i) => (
-          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}} key={e.id}>
+          <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}} key={e.id} state={e}>
            <Buttons element={e} index={i} />
           </Link>
         ))}

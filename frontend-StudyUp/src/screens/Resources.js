@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useLocation ,state} from "react-router-dom";
 import Buttons from '../components/Buttons.js'
 import ShowEmptyMessage from "../components/showEmptyMessage.js";
 import Banner from '../components/Banner.js';
 import  {useTheme }  from "../contexts/ThemeContext.js";
 export default function Resources() {
   const [List, setList] = useState([]);
-  const { colors} = useTheme();
-  const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state;
   const { moduleId } = useParams();
 
   useEffect(() => {
@@ -31,7 +31,8 @@ export default function Resources() {
         <meta name="description" content={List.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner />
-      <div className='d-flex flex-wrap align-items-center justify-content-center'>
+      {state.name} {state.code}
+      <div className='d-flex flex-wrap align-items-center justify-content-start'>
          <ShowEmptyMessage dataList={List} />
         {List.map((e, i) => (
           <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id} style={{textDecoration:"none"}}>

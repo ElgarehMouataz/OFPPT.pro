@@ -1,10 +1,5 @@
 import  {useTheme}  from "../contexts/ThemeContext.js";
-import { useEffect } from "react";
 export default function Banner() {
-  useEffect(() => {
-  const img = new Image();
-  img.src = "/images/hero.jpg";
-}, []);
 
      const { colors, mode,toggleTheme } = useTheme()
     return (

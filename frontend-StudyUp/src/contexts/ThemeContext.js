@@ -11,11 +11,12 @@ const themes = {
         color: '#F5F7FA',
         },
     text: "#1F3C88",
-    icon:{backgroundImage:"url(/images/darkMode.png)",
-         backgroundSize:"70%",
+    icon:{backgroundImage:"url(/images/darkMode.webp)",
+         backgroundSize:"50%",
         backgroundRepeat:"no-repeat",
         backgroundPosition:"center",
         backgroundColor:'#008acaff',
+
     }
   },
   dark: {
@@ -25,8 +26,8 @@ const themes = {
         color: 'white',
         },
     text: "#ffffffff",
-    icon:{backgroundImage:"url(/images/lightMode.png)",
-        backgroundSize:"70%",
+    icon:{backgroundImage:"url(/images/lightMode.webp)",
+        backgroundSize:"50%",
         backgroundRepeat:"no-repeat",
         backgroundPosition:"center",
         backgroundColor:'#314EB7',

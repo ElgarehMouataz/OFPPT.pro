@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+ 
+  # DO NOT rewrite real files
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+ 
+  # SPA fallback
+  RewriteRule . /index.html [L]
+</IfModule>
