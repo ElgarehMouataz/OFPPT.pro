@@ -11,13 +11,13 @@ export default function Modules() {
   const [EFF, setEFF] = useState([]);
   const location = useLocation();
   const state = location.state;
-  const { anneeId, filliereId } = useParams();
+  const { anneeCode } = useParams();
    const { colors} = useTheme();
   useEffect(() => {
-fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/modules`).then(res =>res.json()).then(res=>setModules(res.data)).catch(console.log('erreur fetch'));
-fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>res.json()).then(res=>setEFF(res.data)).catch(console.log('erreur fetch'));
+fetch(`https://podo.b1.ma/api/public/filieres/${state.id}/modules`).then(res =>res.json()).then(res=>setModules(res.data)).catch(console.log('erreur fetch'));
+fetch(`https://podo.b1.ma/api/public/filieres/${state.id}/effs`).then(res =>res.json()).then(res=>setEFF(res.data)).catch(console.log('erreur fetch'));
 
-  }, [filliereId]);
+  }, [state]);
   return (
     <>
       <Helmet>
@@ -31,14 +31,14 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
       <div className='d-flex justify-content-center'>
         <div className="d-flex flex-wrap justify-content-center w-75">
       <ShowEmptyMessage dataList={Modules.concat(EFF)} />
-       <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura',textDecoration: 'underline', fontWeight:"bold" }}>Modules :</h2>
+       {Modules.length > 0 && <> <hr style={{width:"100%",color: colors.text}}/> <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' ,textDecoration: 'underline', fontWeight:"bold"}}>Modules :</h2></>}
         {Modules.map((e,i)=>{return(
-          <Link key={e.id} to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`} state={e} style={{textDecoration:"none"}}>
+          <Link key={e.id} to={`/Annees/${anneeCode}/Fillieres/${state.code}/Modules/${e.code}/Resources`} state={e} style={{textDecoration:"none"}}>
           <Buttons element={e} index={i} />
           </Link>
           )
         })}
-        {EFF.length > 0 && <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' ,textDecoration: 'underline', fontWeight:"bold"}}>EFFS :</h2>}
+        {EFF.length > 0 && <><hr style={{width:"100%",color: colors.text}}/><h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' ,textDecoration: 'underline', fontWeight:"bold"}}>EFFS :</h2></>}
         {EFF.map((e,i)=>{return (
            <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id} state={e} >
           <Buttons element={e} index={i} />
