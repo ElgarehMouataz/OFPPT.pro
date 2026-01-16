@@ -28,7 +28,7 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura'  }}>
         Preparation module:
       </h1>
-      <div className='d-flex flex-column align-items-center justify-content-center'>
+      <div className='d-flex flex-wrap align-items-center justify-content-center'>
       <ShowEmptyMessage dataList={Modules.concat(EFF)} />
         {Modules.map((e,i)=>{return(
           <Link key={e.id} to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`} state={e} style={{textDecoration:"none"}}>

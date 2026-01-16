@@ -31,7 +31,7 @@ export default function Resources() {
         <meta name="description" content={List.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner />
-      <div className='d-flex flex-column align-items-center justify-content-center'>
+      <div className='d-flex flex-wrap align-items-center justify-content-center'>
          <ShowEmptyMessage dataList={List} />
         {List.map((e, i) => (
           <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id} style={{textDecoration:"none"}}>
