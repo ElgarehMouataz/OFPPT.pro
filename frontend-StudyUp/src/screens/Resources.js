@@ -4,12 +4,13 @@ import { useParams, useLocation ,state} from "react-router-dom";
 import Buttons from '../components/Buttons.js'
 import ShowEmptyMessage from "../components/showEmptyMessage.js";
 import Banner from '../components/Banner.js';
-import  {useTheme }  from "../contexts/ThemeContext.js";
+import  {useTheme }  from "../contexts/ThemeContext.js"
 export default function Resources() {
   const [List, setList] = useState([]);
   const location = useLocation();
   const state = location.state;
   const { moduleId } = useParams();
+  const { colors} = useTheme();
 
   useEffect(() => {
     const APIS = [`https://podo.b1.ma/api/public/modules/${moduleId}/courses`,
@@ -31,14 +32,16 @@ export default function Resources() {
         <meta name="description" content={List.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner />
-      {state.name} {state.code}
-      <div className='d-flex flex-wrap align-items-center justify-content-start'>
+      <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>{state.name} {state.code}</h2>
+      <div className='d-flex justify-content-center'>
+        <div className="d-flex flex-wrap justify-content-center w-75">
          <ShowEmptyMessage dataList={List} />
         {List.map((e, i) => (
           <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id} style={{textDecoration:"none"}}>
            <Buttons element={e} index={i} />
           </a>
         ))}
+      </div>
       </div>
     </>
   )

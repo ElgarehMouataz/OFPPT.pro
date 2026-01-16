@@ -17,20 +17,22 @@ export default function Filliere() {
   return (
     <div key="filliere-main-view">
       <Helmet >
-        <title>StudyUp-</title>
+        <title>StudyUp-Filliere</title>
         <meta name="description" content={Filliere.map(e => e.name + " " + e.code).join(", ")} />
       </Helmet>
       <Banner/>
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
         {state.name} {state.code}
       </h1>
-      <div className='d-flex flex-column align-items-center justify-content-start'>
+      <div className='d-flex justify-content-center'>
+        <div className="d-flex flex-wrap justify-content-center w-75">
         <ShowEmptyMessage dataList={Filliere} />
         {Filliere.map((e, i) => (
           <Link to={`/Annees/${anneeId}/Fillieres/${e.id}/Modules`} state={e} style={{textDecoration:"none"}} key={e.id} state={e}>
            <Buttons element={e} index={i} />
           </Link>
         ))}
+      </div>
       </div>
     </div>
   );

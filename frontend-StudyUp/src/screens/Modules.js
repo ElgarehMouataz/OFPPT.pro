@@ -28,21 +28,23 @@ fetch(`https://podo.b1.ma/api/public/filieres/${filliereId}/effs`).then(res =>re
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura'  }}>
         {state.name} {state.code}
       </h1>
-      <div className='d-flex flex-wrap align-items-center justify-content-start'>
+      <div className='d-flex justify-content-center'>
+        <div className="d-flex flex-wrap justify-content-center w-75">
       <ShowEmptyMessage dataList={Modules.concat(EFF)} />
-       <h2 style={{ width: "100%" }}>Modules</h2>
+       <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura',textDecoration: 'underline', fontWeight:"bold" }}>Modules :</h2>
         {Modules.map((e,i)=>{return(
           <Link key={e.id} to={`/Annees/${anneeId}/Fillieres/${filliereId}/Modules/${e.id}/Resources`} state={e} style={{textDecoration:"none"}}>
           <Buttons element={e} index={i} />
           </Link>
           )
         })}
-        <h2 style={{ width: "100%" }}>EFFS</h2>
+        {EFF.length > 0 && <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' ,textDecoration: 'underline', fontWeight:"bold"}}>EFFS :</h2>}
         {EFF.map((e,i)=>{return (
            <a href={`https://podo.b1.ma/storage/${e.file_path}`} download={e.title} key={e.id} state={e} >
           <Buttons element={e} index={i} />
           </a>
         )})}
+      </div>
       </div>
     </>
   );

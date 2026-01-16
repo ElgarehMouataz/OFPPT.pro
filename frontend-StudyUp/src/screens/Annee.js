@@ -20,12 +20,14 @@ export default function Annee() {
       <Banner />
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
       </h1>
-      <div className='d-flex flex-wrap align-items-center justify-content-start'>
+      <div className='d-flex justify-content-center'>
+        <div className="d-flex flex-wrap justify-content-center w-75">
         {annee.map((e, i) => (
           <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id} state={e}>  
             <Buttons element={e} index={i} />
           </Link>
         ))}
+      </div>
       </div>
     </div>
   );
