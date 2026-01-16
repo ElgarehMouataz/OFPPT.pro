@@ -33,7 +33,7 @@ fetch(`https://podo.b1.ma/api/public/filieres/${state.id}/effs`).then(res =>res.
       <ShowEmptyMessage dataList={Modules.concat(EFF)} />
        {Modules.length > 0 && <> <hr style={{width:"100%",color: colors.text}}/> <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' ,textDecoration: 'underline', fontWeight:"bold"}}>Modules :</h2></>}
         {Modules.map((e,i)=>{return(
-          <Link key={e.id} to={`/Annees/${anneeCode}/Fillieres/${state.code}/Modules/${e.code}/Resources`} state={e} style={{textDecoration:"none"}}>
+          <Link key={e.id} to={`/Choix-Annees/${anneeCode}/Choix-Fillieres/${state.code}/Choix-Modules/${e.code}/Choix-Resources`} state={e} style={{textDecoration:"none"}}>
           <Buttons element={e} index={i} />
           </Link>
           )
