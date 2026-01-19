@@ -22,7 +22,7 @@ fetch(`https://podo.b1.ma/api/public/modules/${state.id}/efms`).then(res =>res.j
     <>
       <Helmet>
         <title>{state.name} {state.code}</title>
-        <meta name="description" content={CCs.concat(EFMS).concat(Courses).map(e => e.name + " " + e.code).join(", ")} />
+        <meta name="description" content={CCs.concat(EFMS).concat(Courses).map(e => e.name||e.title + (e.code ? " " + e.code : "")).join(", ")} />
       </Helmet>
       <Banner />
       <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>{state.name} {state.code}</h2>
