@@ -17,7 +17,7 @@ export default function Filliere() {
     <div key="filliere-main-view">
       <Helmet >
         <title>{state.name}</title>
-        <meta name="description" content={Filliere.map(e => e.name + " " + e.code).join(", ")} />
+        <meta name="description" content={Filliere.map(e => e.name||e.title + (e.code ? " " + e.code : "")).join(", ")} />
       </Helmet>
       <Banner/>
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
