@@ -15,7 +15,12 @@ export default function Annee() {
 
       <Helmet>
         <title>StudyUp - Année</title>
-        <meta name="description" content={annee.map(e => e.name + " " + e.code).join(", ")} />
+        <meta   name="description" 
+  content={annee.map(e => {
+    const name = e.name || e.title;
+    const code = e.code ? " " + e.code : "";
+    return name + code;
+  }).join(", ")} />
       </Helmet>
       <Banner />
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
