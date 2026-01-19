@@ -14,7 +14,7 @@ export default function Annee() {
     <div key="annee-view">
 
       <Helmet>
-        <title>StudyUp - Année</title>
+        <title>Année</title>
         <meta   name="description" 
   content={annee.map(e => {
     const name = e.name || e.title;
