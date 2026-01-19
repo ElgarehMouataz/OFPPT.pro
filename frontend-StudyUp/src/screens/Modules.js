@@ -12,11 +12,10 @@ export default function Modules() {
   const location = useLocation();
   const state = location.state;
   const { anneeCode } = useParams();
-   const { colors} = useTheme();
+  const { colors} = useTheme();
   useEffect(() => {
 fetch(`https://podo.b1.ma/api/public/filieres/${state.id}/modules`).then(res =>res.json()).then(res=>setModules(res.data)).catch(console.log('erreur fetch'));
 fetch(`https://podo.b1.ma/api/public/filieres/${state.id}/effs`).then(res =>res.json()).then(res=>setEFF(res.data)).catch(console.log('erreur fetch'));
-
   }, [state]);
   return (
     <>
