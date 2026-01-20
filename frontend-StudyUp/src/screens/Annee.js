@@ -25,7 +25,7 @@ export default function Annee() {
           content={annee.map(e => {
             const name = e.name || e.title;
             const code = e.code ? " " + e.code : "";
-            return "ofppt " + name + code;
+            return "OFPPT " + name + code;
           }).join(", ")} 
         />
       </Helmet>

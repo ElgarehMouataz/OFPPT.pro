@@ -6,6 +6,7 @@ export default function Buttons({ element, index }) {
   return (
     <div 
       style={{
+        backgroundColor: colors.cardBackground,
         border: "1px solid",
         borderColor: colors.text,
         borderRadius: "12px",
@@ -29,11 +30,11 @@ export default function Buttons({ element, index }) {
       }}
     >  
       <h5 style={{ 
-        color: colors.text,
+        ...colors.titleHighlight,
         margin: 0,
         fontSize: "1.1rem",
         fontWeight: "600",
-        lineHeight: "1.4"
+        lineHeight: "1.4",
       }}>
         {element.name || element.title} {element.code ? `${"- "+element.code}` : ""}
       </h5>
@@ -47,10 +48,21 @@ export default function Buttons({ element, index }) {
           maxWidth: "220px",
           padding: "10px 20px",
           fontSize: "1rem",
-          cursor: "pointer"
+          cursor: "pointer",
+          border: "none",
+          borderRadius: "8px",
+          transition: "all 0.2s ease"
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "scale(1.05)";
+          e.currentTarget.style.boxShadow = "0 4px 12px rgba(79, 70, 229, 0.4)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "none";
         }}
       >
-        <h5>Voir plus</h5>
+        <h5 style={{ margin: 0 }}>Voir plus</h5>
         {element.title && <img src="/images/download.png" alt="download icon" />}
       </button>
       

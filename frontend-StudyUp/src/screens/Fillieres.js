@@ -22,7 +22,7 @@ export default function Filliere() {
   return (
     <div key="filliere-main-view">
       <Helmet>
-        <title>{state.name}</title>
+        <title>OFPPT {state.name}</title>
         <meta 
           name="description" 
           content={Filliere.map(e => {

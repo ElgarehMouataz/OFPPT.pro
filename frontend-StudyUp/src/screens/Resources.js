@@ -32,7 +32,7 @@ export default function Resources() {
   return (
     <>
       <Helmet>
-        <title>{state.name} {state.code}</title>
+        <title>OFPPT {state.name} {state.code}</title>
         <meta 
           name="description" 
           content={CCs.concat(EFMS).concat(Courses).map(e => {

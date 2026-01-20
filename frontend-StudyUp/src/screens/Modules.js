@@ -28,7 +28,7 @@ export default function Modules() {
   return (
     <>
       <Helmet>
-        <title>{state.name} {state.code}</title>
+        <title>OFPPT {state.name} {state.code}</title>
         <meta 
           name="description" 
           content={Modules.concat(EFF).map(e => {
