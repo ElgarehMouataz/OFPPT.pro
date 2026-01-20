@@ -29,7 +29,7 @@ export default function Filliere() {
         <ShowEmptyMessage dataList={Filliere} />
         {Filliere.length > 0 && <> <hr style={{width:"100%"}}/> <h2 style={{ width: "100%" ,color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' ,textDecoration: 'underline', fontWeight:"bold"}}>Fillieres :</h2></>}
         {Filliere.map((e, i) => (
-          <Link to={`/Choix-Annees/${state.id}/Choix-Fillieres/${e.code}/Choix-Modules`} state={e} style={{textDecoration:"none"}} key={e.id}>
+          <Link to={`/Annees/${state.id}/Fillieres/${e.code}/Modules`} state={e} style={{textDecoration:"none"}} key={e.id}>
            <Buttons element={e} index={i} />
           </Link>
         ))}

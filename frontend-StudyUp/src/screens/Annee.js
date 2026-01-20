@@ -28,7 +28,7 @@ export default function Annee() {
       <div className='d-flex justify-content-center'>
         <div className="d-flex flex-wrap justify-content-center w-75">
         {annee.map((e, i) => (
-          <Link to={`Choix-Annees/${e.id}/Choix-Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id}>
+          <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id}>
             <Buttons element={e} index={i} />
           </Link>
         ))}

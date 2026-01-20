@@ -22,7 +22,7 @@ async function fetchData() {
     for (const year of years) {
       // Add filières route for this year
       allRoutes.push({
-        url: `/Choix-Annees/${year.id}/Choix-Fillieres`,
+        url: `/Annees/${year.id}/Fillieres`,
         changefreq: 'weekly',
         priority: 0.8
       });
@@ -39,7 +39,7 @@ async function fetchData() {
       for (const filiere of filieres) {
         // Add modules route for this filière
         allRoutes.push({
-          url: `/Choix-Annees/${year.id}/Choix-Fillieres/${filiere.id}/Choix-Modules`,
+          url: `/Annees/${year.id}/Fillieres/${filiere.id}/Modules`,
           changefreq: 'weekly',
           priority: 0.7
         });
@@ -56,7 +56,7 @@ async function fetchData() {
         for (const module of modules) {
           // Add resources route for this module
           allRoutes.push({
-            url: `/Choix-Annees/${year.id}/Choix-Fillieres/${filiere.id}/Choix-Modules/${module.id}/Choix-Resources`,
+            url: `/Annees/${year.id}/Fillieres/${filiere.id}/Modules/${module.id}/Resources`,
             changefreq: 'monthly',
             priority: 0.6
           });
@@ -83,7 +83,7 @@ async function generateSitemap() {
     // Static routes
     const staticRoutes = [
       { url: '/', changefreq: 'weekly', priority: 1.0 },
-      { url: '/Choix-Annees', changefreq: 'weekly', priority: 0.9 },
+      { url: '/Annees', changefreq: 'weekly', priority: 0.9 },
     ];
     
     console.log('📝 Generating sitemap file...');
