@@ -24,7 +24,7 @@ fetch(`https://podo.b1.ma/api/public/filieres/${state.id}/effs`).then(res =>res.
         <meta name="description" content={Modules.concat(EFF).map(e => {
     const name = e.name || e.title;
     const code = e.code ? " " + e.code : "";
-    return name + code;
+    return "ofppt " + name + code;
   }).join(", ")} />
       </Helmet>
       <Banner />

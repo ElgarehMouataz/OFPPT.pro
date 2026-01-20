@@ -14,12 +14,12 @@ export default function Annee() {
     <div key="annee-view">
 
       <Helmet>
-        <title>Année</title>
+        <title>OFPPT Année</title>
         <meta   name="description" 
   content={annee.map(e => {
     const name = e.name || e.title;
     const code = e.code ? " " + e.code : "";
-    return name + code;
+    return "ofppt " + name + code;
   }).join(", ")} />
       </Helmet>
       <Banner />
@@ -28,7 +28,7 @@ export default function Annee() {
       <div className='d-flex justify-content-center'>
         <div className="d-flex flex-wrap justify-content-center w-75">
         {annee.map((e, i) => (
-          <Link to={`Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id}>
+          <Link to={`/Annees/${e.id}/Fillieres`} state={e} style={{textDecoration:"none"}} key={e.id}>
             <Buttons element={e} index={i} />
           </Link>
         ))}

@@ -19,10 +19,10 @@ root.render(
       <BrowserRouter>
       <Routes>
         <Route path="/" element= {<App />}/>
-        <Route path="/Choix-Annees" element= {<Annee />}/>
-        <Route path="/Choix-Annees/:anneeCode/Choix-Fillieres" element= {<Filliere />} />
-        <Route path="/Choix-Annees/:anneeCode/Choix-Fillieres/:filliereCode/Choix-Modules" element= {<Module />}/>
-        <Route path="/Choix-Annees/:anneeCode/Choix-Fillieres/:filliereCode/Choix-Modules/:moduleCode/Choix-Resources" element= {<Resources />}/>
+        <Route path="/Annees" element= {<Annee />}/>
+        <Route path="/Annees/:anneeCode/Fillieres" element= {<Filliere/>} />
+        <Route path="/Annees/:anneeCode/Fillieres/:filliereCode/Modules" element= {<Module/>}/>
+        <Route path="/Annees/:anneeCode/Fillieres/:filliereCode/Modules/:moduleCode/Resources" element= {<Resources/>}/>
       </Routes>
       </BrowserRouter>
       </ThemeProvider>

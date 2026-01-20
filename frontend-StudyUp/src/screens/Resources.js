@@ -25,7 +25,7 @@ fetch(`https://podo.b1.ma/api/public/modules/${state.id}/efms`).then(res =>res.j
         <meta name="description" content={CCs.concat(EFMS).concat(Courses).map(e => {
     const name = e.name || e.title;
     const code = e.code ? " " + e.code : "";
-    return name + code;
+    return "ofppt " + name + code;
   }).join(", ")} />
       </Helmet>
       <Banner />

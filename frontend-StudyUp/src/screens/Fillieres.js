@@ -18,7 +18,7 @@ export default function Filliere() {
       <Helmet >
         <title>{state.name}</title>
         <meta   name="description" 
-  content={Filliere.map(e => {const name = e.name || e.title;const code = e.code ? " " + e.code : "";return name + code;}).join(", ")} />
+  content={Filliere.map(e => {const name = e.name || e.title;const code = e.code ? " " + e.code : "";return "ofppt " + name + code;}).join(", ")} />
       </Helmet>
       <Banner/>
       <h1 style={{ color: colors.text, marginLeft: '10px', marginTop: '40px', fontFamily: 'jura' }}>
