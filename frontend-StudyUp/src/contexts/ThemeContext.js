@@ -15,26 +15,27 @@ const themes = {
          backgroundSize:"50%",
         backgroundRepeat:"no-repeat",
         backgroundPosition:"center",
-        backgroundColor:'#008acaff',
+        backgroundColor:'#3759d1',
 
     }
   },
   dark: {
-    background: "#010514ff",
-    buttonstyle:{
-        backgroundColor: '#314eb7ff',
-        color: 'white',
-        },
-    text: "#ffffffff",
-    icon:{backgroundImage:"url(/images/lightMode.webp)",
-        backgroundSize:"50%",
-        backgroundRepeat:"no-repeat",
-        backgroundPosition:"center",
-        backgroundColor:'#314EB7',
-        order:'1'
-
-    }
+  background: "#0a0e27",
+  buttonstyle: {
+    backgroundColor: '#4f46e5',
+    color: '#ffffff',
   },
+  text: "#e0e7ff",
+  boxShadow: "0 4px 6px rgba(79, 70, 229, 0.3)",
+  icon: {
+    backgroundImage: "url(/images/lightMode.webp)",
+    backgroundSize: "50%",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundColor: '#6366f1',
+    order: '1'
+  }
+}
 };
 
 export default function ThemeProvider({ children }) {

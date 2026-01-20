@@ -19,18 +19,36 @@ export default function ShowEmptyMessage({ dataList }) {
   }, [dataList]);
 
   if (dataList.length === 0 && !showEmptyMessageToggle) {
-    return <Spinner />;
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        minHeight: '300px'
+      }}>
+        <Spinner />
+      </div>
+    );
   }
 
   if (dataList.length === 0 && showEmptyMessageToggle) {
     return (
-      <div className="d-flex flex-column align-items-center justify-content-center">
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        minHeight: '300px',
+        gap: '20px'
+      }}>
         <h2
           style={{
             color: colors.text,
-            marginTop: "40px",
             fontFamily: "jura",
             textAlign: "center",
+            margin: 0
           }}
         >
           Aucune Information disponible pour ce moment.
@@ -38,7 +56,12 @@ export default function ShowEmptyMessage({ dataList }) {
 
         <button
           className="buttonstyle"
-          style={{ ...colors.buttonstyle }}
+          style={{ 
+            ...colors.buttonstyle,
+            padding: '10px 30px',
+            fontSize: '1rem',
+            cursor: 'pointer'
+          }}
           onClick={() => navigate(-1)}
         >
           Retourner
@@ -46,4 +69,6 @@ export default function ShowEmptyMessage({ dataList }) {
       </div>
     );
   }
+
+  return null;
 }
