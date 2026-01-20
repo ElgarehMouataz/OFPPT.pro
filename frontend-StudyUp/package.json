@@ -25,12 +25,11 @@
     "eject": "react-scripts eject",
     "generate-sitemap": "node sitemap-generator.js && npx prettier --write public/sitemap.xml",
     "postbuild": "node sitemap-generator.js"
-
   },
   "reactSnap": {
-  "source": "build",
-  "inlineCss": true
-},
+    "source": "build",
+    "inlineCss": true
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
