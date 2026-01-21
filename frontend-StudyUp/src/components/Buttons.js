@@ -62,7 +62,7 @@ export default function Buttons({ element, index }) {
           e.currentTarget.style.boxShadow = "none";
         }}
       >
-        <h5 style={{ margin: 0 }}>Voir plus</h5>
+        <h5 style={{ margin: 0 }}>{element.name? "Voir plus" : "Telecharger"}</h5>
         {element.title && <img src="/images/download.png" alt="download icon" />}
       </button>
       
