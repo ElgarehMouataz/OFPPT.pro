@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# OFPPT.pro - Educational Resource Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A high-performance React Single Page Application (SPA) designed to serve educational resources for Moroccan vocational training (OFPPT) students.
 
-## Available Scripts
+## Architecture & Engineering
+This frontend application is built with a focus on performance and strict separation of concerns:
+- **Component-Driven UI**: Strict isolation between presentational elements and stateful business logic containers.
+- **Global State Management**: Aggressively caches fetched educational modules (EFM, EFF, TP resources) to minimize redundant network requests and improve TTFB.
+- **API Optimization**: Implements lazy-loading and pagination when consuming the REST API to handle thousands of varied resources without blocking the main UI thread.
+- **Responsive Design**: Mobile-first CSS architecture featuring custom dark mode support and accessible navigation.
 
-In the project directory, you can run:
+## Tech Stack
+- **Framework**: React.js
+- **State Management**: React Context / Custom Hooks
+- **Styling**: Modular CSS / Responsive Grid
+- **Deployment**: Configured for Vercel Edge Networks
 
-### `npm start`
+## Project Structure
+- `src/components/` - Reusable presentational UI elements (Buttons, Cards, Navbars).
+- `src/pages/` - Stateful container components mapping to router endpoints.
+- `src/services/` - Abstracted API consumption and fetch logic.
+- `src/assets/` - Static media and styles.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Development Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+# Install dependencies
+npm install
 
-### `npm test`
+# Start local development server
+npm start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Build for production
+npm run build
+```
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Deployment Notes
+This project is configured to be deployed via Vercel. Ensure environment variables for the production REST API are properly set in the Vercel dashboard prior to triggering a build.

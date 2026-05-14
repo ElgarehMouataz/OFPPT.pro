@@ -5,6 +5,23 @@ const path = require('path');
 const DOMAIN = 'https://ofppt.pro';
 const API_BASE_URL = 'https://podo.b1.ma/api/public';
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+async function fetchWithRetry(url, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await delay(300); // 300ms base delay between requests
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      console.log(`⚠️ Retry ${i + 1}/${retries} for ${url}... (${err.message})`);
+      await delay(1000 * (i + 1)); // Exponential backoff
+    }
+  }
+}
+
 // Fetch data from your API
 async function fetchData() {
   try {
@@ -12,8 +29,7 @@ async function fetchData() {
     
     // 1. Fetch all years
     console.log('📡 Fetching years...');
-    const yearsResponse = await fetch(`${API_BASE_URL}/years`);
-    const yearsData = await yearsResponse.json();
+    const yearsData = await fetchWithRetry(`${API_BASE_URL}/years`);
     const years = yearsData.data;
     
     console.log(`✅ Found ${years.length} years`);
@@ -29,8 +45,7 @@ async function fetchData() {
       
       // 2. Fetch filieres for this year
       console.log(`📡 Fetching filières for year ${year.name}...`);
-      const filieresResponse = await fetch(`${API_BASE_URL}/years/${year.id}/filieres`);
-      const filieresData = await filieresResponse.json();
+      const filieresData = await fetchWithRetry(`${API_BASE_URL}/years/${year.id}/filieres`);
       const filieres = filieresData.data;
       
       console.log(`✅ Found ${filieres.length} filières for ${year.name}`);
@@ -46,8 +61,7 @@ async function fetchData() {
         
         // 3. Fetch modules for this filière
         console.log(`📡 Fetching modules for ${filiere.name}...`);
-        const modulesResponse = await fetch(`${API_BASE_URL}/filieres/${filiere.id}/modules`);
-        const modulesData = await modulesResponse.json();
+        const modulesData = await fetchWithRetry(`${API_BASE_URL}/filieres/${filiere.id}/modules`);
         const modules = modulesData.data;
         
         console.log(`✅ Found ${modules.length} modules for ${filiere.name}`);

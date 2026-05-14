@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Buttons from "../components/Buttons"
-import Banner from '../components/Banner.js';
-import { useTheme } from "../contexts/ThemeContext.js";
+import Banner from '../components/Banner';
+import ShowEmptyMessage from "../components/showEmptyMessage";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function Annee() {
   const [annee, setAnnee] = useState([]);
@@ -17,7 +18,7 @@ export default function Annee() {
   }, []);
   
   return (
-    <div key="annee-view">
+    <main key="annee-view">
       <Helmet>
         <title>OFPPT Année</title>
         <meta 
@@ -28,6 +29,9 @@ export default function Annee() {
             return "OFPPT " + name + code;
           }).join(", ")} 
         />
+        <meta property="og:title" content="OFPPT Années de Formation" />
+        <meta property="og:description" content="Découvrez les différentes années de formation OFPPT." />
+        <meta property="og:type" content="website" />
       </Helmet>
       <Banner />
       
@@ -38,13 +42,41 @@ export default function Annee() {
       }}>
         <h1 style={{ 
           color: colors.text, 
-          marginTop: '40px',
-          marginBottom: '20px',
+          marginTop: '50px',
+          marginBottom: '25px',
           fontFamily: 'jura',
-          fontSize: 'clamp(1.5rem, 4vw, 2.5rem)'
+          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+          fontWeight: '800',
+          letterSpacing: '-1px',
+          textShadow: '0 2px 10px rgba(0,0,0,0.1)'
         }}>
-          Années
+          ANNEE
         </h1>
+        
+        <ShowEmptyMessage dataList={annee} />
+        
+        {annee.length > 0 && (
+          <>
+            <hr style={{ 
+              width: "80%",
+              maxWidth: "600px",
+              border: 'none',
+              height: '4px',
+              background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent)",
+              margin: '40px auto'
+            }} />
+            <h2 style={{ 
+              color: colors.text, 
+              marginBottom: '40px',
+              fontFamily: 'jura',
+              fontWeight: "700",
+              fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
+              letterSpacing: '0.5px'
+            }}>
+              Choisissez votre année :
+            </h2>
+          </>
+        )}
         
         <div style={{
           display: "grid",
@@ -58,8 +90,9 @@ export default function Annee() {
               state={e} 
               style={{
                 textDecoration: "none",
-                height: "100%",
-                display: "block"
+                display: "flex",
+                flexDirection: "column",
+                height: "100%"
               }} 
               key={e.id}
             >
@@ -68,6 +101,6 @@ export default function Annee() {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

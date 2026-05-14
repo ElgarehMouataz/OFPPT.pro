@@ -1,4 +1,4 @@
-import { useTheme } from "../contexts/ThemeContext.js";
+import { useTheme } from "../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";

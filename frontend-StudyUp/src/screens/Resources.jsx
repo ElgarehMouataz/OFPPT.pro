@@ -1,38 +1,71 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useLocation } from "react-router-dom";
-import Buttons from '../components/Buttons.js'
-import ShowEmptyMessage from "../components/showEmptyMessage.js";
-import Banner from '../components/Banner.js';
-import { useTheme } from "../contexts/ThemeContext.js"
+import { useLocation, useParams } from "react-router-dom";
+import Buttons from '../components/Buttons'
+import ShowEmptyMessage from "../components/showEmptyMessage";
+import Banner from '../components/Banner';
+import { useTheme } from "../contexts/ThemeContext"
 
 export default function Resources() {
   const [Courses, setCourses] = useState([]);
   const [CCs, setCCs] = useState([]);
   const [EFMS, setEFMs] = useState([]);
+  const [moduleInfo, setModuleInfo] = useState(null);
   const location = useLocation();
   const state = location.state;
+  const { anneeCode, filliereCode, moduleCode } = useParams();
   const { colors } = useTheme();
 
   useEffect(() => {
-    fetch(`https://podo.b1.ma/api/public/modules/${state.id}/courses`)
+    if (state && state.id) {
+      setModuleInfo(state);
+      fetchResources(state.id);
+    } else {
+      // Step 1: Find the filiere ID
+      fetch(`https://podo.b1.ma/api/public/years/${anneeCode}/filieres`)
+        .then(res => res.json())
+        .then(res => {
+          const filiere = res.data.find(f => String(f.code) === String(filliereCode));
+          if (filiere) {
+            // Step 2: Find the module ID
+            fetch(`https://podo.b1.ma/api/public/filieres/${filiere.id}/modules`)
+              .then(mRes => mRes.json())
+              .then(mRes => {
+                const mod = mRes.data.find(m => String(m.code) === String(moduleCode));
+                if (mod) {
+                  setModuleInfo(mod);
+                  fetchResources(mod.id);
+                }
+              })
+              .catch(() => console.log('erreur fetch modules'));
+          }
+        })
+        .catch(() => console.log('erreur fetch filieres'));
+    }
+  }, [state, anneeCode, filliereCode, moduleCode]);
+
+  const fetchResources = (moduleId) => {
+    fetch(`https://podo.b1.ma/api/public/modules/${moduleId}/courses`)
       .then(res => res.json())
       .then(res => setCourses(res.data))
-      .catch(() => console.log('erreur fetch'));
-    fetch(`https://podo.b1.ma/api/public/modules/${state.id}/ccs`)
+      .catch(() => console.log('erreur fetch courses'));
+    fetch(`https://podo.b1.ma/api/public/modules/${moduleId}/ccs`)
       .then(res => res.json())
       .then(res => setCCs(res.data))
-      .catch(() => console.log('erreur fetch'));
-    fetch(`https://podo.b1.ma/api/public/modules/${state.id}/efms`)
+      .catch(() => console.log('erreur fetch ccs'));
+    fetch(`https://podo.b1.ma/api/public/modules/${moduleId}/efms`)
       .then(res => res.json())
       .then(res => setEFMs(res.data))
-      .catch(() => console.log('erreur fetch'));
-  }, [state.id]);
+      .catch(() => console.log('erreur fetch efms'));
+  };
+
+  const displayModuleName = moduleInfo?.name || moduleInfo?.title || "Module";
+  const displayModuleCode = moduleInfo?.code || "";
 
   return (
-    <>
+    <main>
       <Helmet>
-        <title>OFPPT {state.name} {state.code}</title>
+        <title>OFPPT {displayModuleName} {displayModuleCode}</title>
         <meta 
           name="description" 
           content={CCs.concat(EFMS).concat(Courses).map(e => {
@@ -41,6 +74,9 @@ export default function Resources() {
             return "ofppt " + name + code;
           }).join(", ")} 
         />
+        <meta property="og:title" content={`OFPPT ${displayModuleName} ${displayModuleCode} - Ressources`} />
+        <meta property="og:description" content={`Ressources, cours, et examens pour le module ${displayModuleName}.`} />
+        <meta property="og:type" content="website" />
       </Helmet>
       <Banner />
       
@@ -49,33 +85,38 @@ export default function Resources() {
         margin: '0 auto',
         padding: '0 20px'
       }}>
-        <h2 style={{ 
+        <h1 style={{ 
           color: colors.text, 
-          marginTop: '40px',
-          marginBottom: '20px',
+          marginTop: '50px',
+          marginBottom: '25px',
           fontFamily: 'jura',
-          fontSize: 'clamp(1.5rem, 4vw, 2.5rem)'
+          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+          fontWeight: '800',
+          letterSpacing: '-1px',
+          textShadow: '0 2px 10px rgba(0,0,0,0.1)'
         }}>
-          {state.name} {state.code}
-        </h2>
+          {displayModuleName} {displayModuleCode}
+        </h1>
         
         <ShowEmptyMessage dataList={CCs.concat(EFMS).concat(Courses)} />
         
         {Courses.length > 0 && (
           <>
             <hr style={{ 
-              width: "100%",
+              width: "80%",
+              maxWidth: "600px",
               border: 'none',
-              borderTop: `2px solid ${colors.text}`,
-              margin: '30px 0'
+              height: '4px',
+              background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent)",
+              margin: '40px auto'
             }} />
             <h2 style={{ 
               color: colors.text, 
-              marginBottom: '30px',
+              marginBottom: '40px',
               fontFamily: 'jura',
-              textDecoration: 'underline', 
-              fontWeight: "bold",
-              fontSize: 'clamp(1.25rem, 3vw, 2rem)'
+              fontWeight: "700",
+              fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
+              letterSpacing: '0.5px'
             }}>
               Cours et TP :
             </h2>
@@ -93,7 +134,8 @@ export default function Resources() {
                   style={{
                     textDecoration: "none",
                     height: "100%",
-                    display: "block"
+                    display: "flex",
+                    flexDirection: "column"
                   }}
                 >
                   <Buttons element={e} index={i} />
@@ -106,18 +148,20 @@ export default function Resources() {
         {CCs.length > 0 && (
           <>
             <hr style={{ 
-              width: "100%",
+              width: "80%",
+              maxWidth: "600px",
               border: 'none',
-              borderTop: `2px solid ${colors.text}`,
-              margin: '30px 0'
+              height: '4px',
+              background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent)",
+              margin: '40px auto'
             }} />
             <h2 style={{ 
               color: colors.text, 
-              marginBottom: '30px',
+              marginBottom: '40px',
               fontFamily: 'jura',
-              textDecoration: 'underline', 
-              fontWeight: "bold",
-              fontSize: 'clamp(1.25rem, 3vw, 2rem)'
+              fontWeight: "700",
+              fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
+              letterSpacing: '0.5px'
             }}>
               Contrôles Continus :
             </h2>
@@ -135,7 +179,8 @@ export default function Resources() {
                   style={{
                     textDecoration: "none",
                     height: "100%",
-                    display: "block"
+                    display: "flex",
+                    flexDirection: "column"
                   }}
                 >
                   <Buttons element={e} index={i} />
@@ -148,18 +193,20 @@ export default function Resources() {
         {EFMS.length > 0 && (
           <>
             <hr style={{ 
-              width: "100%",
+              width: "80%",
+              maxWidth: "600px",
               border: 'none',
-              borderTop: `2px solid ${colors.text}`,
-              margin: '30px 0'
+              height: '4px',
+              background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent)",
+              margin: '40px auto'
             }} />
             <h2 style={{ 
               color: colors.text, 
-              marginBottom: '30px',
+              marginBottom: '40px',
               fontFamily: 'jura',
-              textDecoration: 'underline', 
-              fontWeight: "bold",
-              fontSize: 'clamp(1.25rem, 3vw, 2rem)'
+              fontWeight: "700",
+              fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
+              letterSpacing: '0.5px'
             }}>
               EFMs :
             </h2>
@@ -177,7 +224,8 @@ export default function Resources() {
                   style={{
                     textDecoration: "none",
                     height: "100%",
-                    display: "block"
+                    display: "flex",
+                    flexDirection: "column"
                   }}
                 >
                   <Buttons element={e} index={i} />
@@ -187,6 +235,6 @@ export default function Resources() {
           </>
         )}
       </div>
-    </>
+    </main>
   );
 }

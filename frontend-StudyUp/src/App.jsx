@@ -1,5 +1,5 @@
 import './App.css';
-import Annee from './screens/Annee.js';
+import Annee from './screens/Annee';
 function App() {
   return (
   <Annee />
