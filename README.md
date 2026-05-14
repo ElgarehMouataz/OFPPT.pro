@@ -1,51 +1,38 @@
-# StudyUp
+# OFPPT.pro - Educational Resource Platform
 
-StudyUp is a modern educational platform designed to streamline access to academic resources, including course materials, modules, and administrative files for OFPPT students. 
+A high-performance React Single Page Application (SPA) designed to serve educational resources for Moroccan vocational training (OFPPT) students.
 
-## Features
-- **Dynamic Resource Navigation**: Seamlessly browse through academic years, specializations (filières), and specific modules.
-- **Modern UI/UX**: Designed with a premium glassmorphism aesthetic, featuring fluid animations, dark/light mode toggles, and responsive grids.
-- **SEO Optimized**: Automatically generates static sitemaps and properly configures meta tags for search engine visibility.
+## Architecture & Engineering
+This frontend application is built with a focus on performance and strict separation of concerns:
+- **Component-Driven UI**: Strict isolation between presentational elements and stateful business logic containers.
+- **Global State Management**: Aggressively caches fetched educational modules (EFM, EFF, TP resources) to minimize redundant network requests and improve TTFB.
+- **API Optimization**: Implements lazy-loading and pagination when consuming the REST API to handle thousands of varied resources without blocking the main UI thread.
+- **Responsive Design**: Mobile-first CSS architecture featuring custom dark mode support and accessible navigation.
 
 ## Tech Stack
-- **Frontend**: Built with React, Vite, and React Router for fast client-side routing.
-- **Styling**: Custom CSS with dynamic theming support (Dark/Light mode) and advanced CSS Grid layouts.
-- **Data Integration**: Integrates directly with the `podo.b1.ma` API to fetch real-time educational data.
+- **Framework**: React.js
+- **State Management**: React Context / Custom Hooks
+- **Styling**: Modular CSS / Responsive Grid
+- **Deployment**: Configured for Vercel Edge Networks
 
-## Getting Started
+## Project Structure
+- `src/components/` - Reusable presentational UI elements (Buttons, Cards, Navbars).
+- `src/pages/` - Stateful container components mapping to router endpoints.
+- `src/services/` - Abstracted API consumption and fetch logic.
+- `src/assets/` - Static media and styles.
 
-### Prerequisites
-Make sure you have Node.js (v18+) and npm installed on your machine.
+## Development Setup
 
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ElgarehMouataz/study-up-DEVOWFS-201.git
-   cd study-up-DEVOWFS-201/frontend-StudyUp
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-### Building for Production
-To build the project for production, run:
 ```bash
+# Install dependencies
+npm install
+
+# Start local development server
+npm start
+
+# Build for production
 npm run build
 ```
-This command will also automatically execute the sitemap generation script, creating an up-to-date `sitemap.xml` for all dynamic routes.
 
-To preview the production build locally:
-```bash
-npm run preview
-```
-
-## Contributing
-Feel free to open issues or submit pull requests. Ensure your code follows the established aesthetic and architectural guidelines.
+## Deployment Notes
+This project is configured to be deployed via Vercel. Ensure environment variables for the production REST API are properly set in the Vercel dashboard prior to triggering a build.
